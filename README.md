@@ -1,4 +1,4 @@
-# eltintero
+# front_lab_software
 
 ## Project setup
 ```
