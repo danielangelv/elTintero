@@ -1,12 +1,16 @@
-<template>
+<template >
   <navBar />
-  <router-view />
+  <router-view class="background"/>
+  <FooterSmall/>
+
 </template>
 <script>
 import navBar from "@/components/navBar.vue";
+import FooterSmall from "@/components/FooterSmall.vue";
 export default {
   components: {
     navBar,
+    FooterSmall
   },
 };
 </script>
@@ -30,5 +34,8 @@ nav a {
 
 nav a.router-link-exact-active {
   color: #42b983;
+}
+.background {
+  background-color: rgb(20 184 166)
 }
 </style>

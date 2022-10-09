@@ -1,6 +1,6 @@
 <template>
   <footer
-    class="pb-6"
+    class="pb-6 footer"
     :class="[
       absolute ? 'absolute w-full bottom-0 bg-blueGray-800' : 'relative',
     ]"
@@ -35,6 +35,7 @@
 
 <script>
 export default {
+  name: "FooterSmall",
   data() {
     return {
       date: new Date().getFullYear(),
@@ -48,3 +49,8 @@ export default {
   },
 };
 </script>
+<style>
+.footer {
+  background-color: black;
+}
+</style>

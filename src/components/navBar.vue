@@ -2,9 +2,7 @@
   <nav class="navbar bg-light">
     <div class="container-fluid">
       <router-link class="navbar-brand" to="/">Home</router-link> |
-      <router-link class="navbar-brand" to="/about">About</router-link>|
-      <router-link class="navbar-brand" to="/login">Iniciar Sesión</router-link
-      >|
+      <router-link class="navbar-brand" to="/login">Iniciar Sesión</router-link>|
       <router-link class="navbar-brand" to="/register">Registro</router-link>
       <form class="d-flex" role="search">
         <input
