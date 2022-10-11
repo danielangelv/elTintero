@@ -21,7 +21,7 @@
                   Escribe tu contraseña
                 </label>
                 <input type="password" id="password"
-                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   placeholder="Su clave" v-model="password" />
               </div>
 
@@ -82,6 +82,10 @@ export default {
   height: 100%;
 }
 #email
+{
+  background-color: #def2f1;
+}
+#password
 {
   background-color: #def2f1;
 }
