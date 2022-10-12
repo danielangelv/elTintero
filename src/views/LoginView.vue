@@ -8,20 +8,21 @@
             <div class="flex-auto lg:px-10 pt-5 pb-5">
 
               <div class="relative w-full mb-3"><br>
-                <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2 align-left" htmlFor="grid-password">
+                <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2 align-left"
+                  htmlFor="grid-password">
                   Escribe tu Email
                 </label>
                 <input type="email" id="email"
-                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                  class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   placeholder="su correo electrónico" v-model="user" />
               </div><br>
 
               <div class="relative w-full mb-3"><br>
                 <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-                  Escribe tu contraseña
+                  Escribe tu contraseña {{password}}
                 </label>
                 <input type="password" id="password"
-                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                  class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   placeholder="Su clave" v-model="password" />
               </div>
 
@@ -58,36 +59,115 @@ export default {
       password: "",
     };
   },
-  components: {
+  components: 
+  {
     LogoSlogan
   },
   methods: {
-    login: function (e) {
-      console.log("clicked", e)
+    login: async function (e) {
+      console.log(e);
+      this.password = window.btoa(this.password);
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Access-Control-Allow-Headers":'*', "Access-Control-Expose-Headers":'*' },
+        mode:"cors",
+        body: JSON.stringify({ username: this.user, password: this.password }),
+        credentials: 'include'
+      };
+      let data = await fetch("http://localhost:5000/login", requestOptions)
+      const respuesta = await data.json();
+      if (respuesta.message == 'wrong password or username') {
+        return alert('¡Usuario o Contraseña incorrecto!');
+      }
+      if (respuesta.message == 'succesfull login') 
+      {
+        localStorage.setItem('username',this.user);
+        alert('¡Inicio de Sesión Exitoso!');
+        window.location = '/';
+      }
     }
   }
 };
 </script>
 
 <style>
-
-#posicionCajaLogin
-{
+#posicionCajaLogin {
   height: 40em;
 }
-#dimCajaLogin
-{
+
+#dimCajaLogin {
   padding-top: 2%;
   width: 100%;
   height: 100%;
 }
-#email
-{
+
+#email {
   background-color: #def2f1;
-}
-#password
-{
-  background-color: #def2f1;
+  border: 1px solid rgb(20 184 166);
 }
 
+#password {
+  background-color: #def2f1;
+  border: 1px solid rgb(20 184 166);
+}
+</style>
+
+<style>
+#regLogo
+{
+  height: 200px;
+}
+
+h1
+{
+  text-align: center;
+  font-size: 4rem;
+  color: black;
+  font-family: 'Abhaya Libre', serif;
+  border-bottom: 2px solid rgb(20 184 166);
+  margin-bottom: 2rem;
+}
+#boxRegisLogo
+{
+  width: 100%;
+  background-color: rgb(20 184 166);
+}
+
+#boxRegis
+{
+  width: 800px;
+  border: 2px solid rgb(20 184 166);
+  justify-content: center;
+}
+
+.row 
+{
+  --bs-gutter-x: 1.5rem;
+  --bs-gutter-y: 0;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: calc(-1 * var(--bs-gutter-y));
+  margin-right: calc(-.5 * var(--bs-gutter-x));
+  margin-left: calc(-.5 * var(--bs-gutter-x));
+  margin-bottom: 10px;
+  font-family: 'Roboto Mono', monospace;
+  color: black;
+  
+}
+
+[type='text'], [type='email'], [type='url'], [type='password'], [type='number'], [type='date'], [type='datetime-local'], [type='month'], [type='search'], [type='tel'], [type='time'], [type='week'], [multiple], textarea, select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: #def2f1;
+    border-color: rgb(20 184 166);
+    border-width: 1px;
+    border-radius: 10px;
+    padding-top: 0.5rem;
+    padding-right: 0.75rem;
+    padding-bottom: 0.5rem;
+    padding-left: 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5rem;
+}
 </style>
