@@ -68,32 +68,21 @@ export default {
       this.password = window.btoa(this.password);
       const requestOptions = {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", "Access-Control-Allow-Headers":'*', "Access-Control-Expose-Headers":'*' },
         mode:"cors",
-        credentials:true,
-        body: JSON.stringify({ username: this.user, password: this.password })
+        body: JSON.stringify({ username: this.user, password: this.password }),
+        credentials: 'include'
       };
       let data = await fetch("http://localhost:5000/login", requestOptions)
-      console.log(data.headers);
-      console.log(data.headers.get("Content-Type"));
-      console.log(data.headers.entries());
-      for(let h of data.headers){
-        console.log(h);
+      const respuesta = await data.json();
+      if (respuesta.message == 'wrong password or username') {
+        return alert('¡Usuario o Contraseña incorrecto!');
       }
-      data = data.headers.get("Set-Cookie");
-      
-      console.log(data)
-      console.log(this.$cookies.keys())
-      console.log(this.$cookies.get("session"))
-      const request = {
-        method: "GET",
-        credentials: true,
-        headers: { "Content-Type": "application/json" },
-        mode: "cors",
-      };
-      data = await fetch("http://localhost:5000/logged", request)
-      data = await data.json();
-      console.log(data);
+      if (respuesta.message == 'succesfull login') {
+        localStorage.setItem('username',this.user);
+        alert('¡Inicio de Sesión Exitoso!');
+        window.location = '/';
+      }
     }
   }
 };

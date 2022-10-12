@@ -10,6 +10,6 @@ import LogoSlogan from "@/components/LogoSlogan.vue"
 export default {
   components: {
     LogoSlogan
-  },
+  }
 };
 </script>
