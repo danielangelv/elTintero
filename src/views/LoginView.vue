@@ -8,7 +8,8 @@
             <div class="flex-auto lg:px-10 pt-5 pb-5">
 
               <div class="relative w-full mb-3"><br>
-                <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2 align-left" htmlFor="grid-password">
+                <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2 align-left"
+                  htmlFor="grid-password">
                   Escribe tu Email
                 </label>
                 <input type="email" id="email"
@@ -18,7 +19,7 @@
 
               <div class="relative w-full mb-3"><br>
                 <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-                  Escribe tu contraseña
+                  Escribe tu contraseña {{password}}
                 </label>
                 <input type="password" id="password"
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
@@ -62,32 +63,58 @@ export default {
     LogoSlogan
   },
   methods: {
-    login: function (e) {
-      console.log("clicked", e)
+    login: async function (e) {
+      console.log(e);
+      this.password = window.btoa(this.password);
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        mode:"cors",
+        credentials:true,
+        body: JSON.stringify({ username: this.user, password: this.password })
+      };
+      let data = await fetch("http://localhost:5000/login", requestOptions)
+      console.log(data.headers);
+      console.log(data.headers.get("Content-Type"));
+      console.log(data.headers.entries());
+      for(let h of data.headers){
+        console.log(h);
+      }
+      data = data.headers.get("Set-Cookie");
+      
+      console.log(data)
+      console.log(this.$cookies.keys())
+      console.log(this.$cookies.get("session"))
+      const request = {
+        method: "GET",
+        credentials: true,
+        headers: { "Content-Type": "application/json" },
+        mode: "cors",
+      };
+      data = await fetch("http://localhost:5000/logged", request)
+      data = await data.json();
+      console.log(data);
     }
   }
 };
 </script>
 
 <style>
-
-#posicionCajaLogin
-{
+#posicionCajaLogin {
   height: 40em;
 }
-#dimCajaLogin
-{
+
+#dimCajaLogin {
   padding-top: 2%;
   width: 100%;
   height: 100%;
 }
-#email
-{
-  background-color: #def2f1;
-}
-#password
-{
+
+#email {
   background-color: #def2f1;
 }
 
+#password {
+  background-color: #def2f1;
+}
 </style>

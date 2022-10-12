@@ -78,14 +78,6 @@
 </template>
 
 <script>
-// @ is an alias to /src
-//import LogoSlogan from "@/components/LogoSlogan.vue"
-
-//export default {
-//  components: {
-//    LogoSlogan
-//  },
-//};
 </script>
 
 <style>
