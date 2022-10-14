@@ -13,7 +13,7 @@
                   Escribe tu Email
                 </label>
                 <input type="email" id="email"
-                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                  class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   placeholder="su correo electrónico" v-model="user" />
               </div><br>
 
@@ -22,7 +22,7 @@
                   Escribe tu contraseña {{password}}
                 </label>
                 <input type="password" id="password"
-                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                  class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   placeholder="Su clave" v-model="password" />
               </div>
 
@@ -59,7 +59,8 @@ export default {
       password: "",
     };
   },
-  components: {
+  components: 
+  {
     LogoSlogan
   },
   methods: {
@@ -78,7 +79,8 @@ export default {
       if (respuesta.message == 'wrong password or username') {
         return alert('¡Usuario o Contraseña incorrecto!');
       }
-      if (respuesta.message == 'succesfull login') {
+      if (respuesta.message == 'succesfull login') 
+      {
         localStorage.setItem('username',this.user);
         alert('¡Inicio de Sesión Exitoso!');
         window.location = '/';
@@ -101,9 +103,71 @@ export default {
 
 #email {
   background-color: #def2f1;
+  border: 1px solid rgb(20 184 166);
 }
 
 #password {
   background-color: #def2f1;
+  border: 1px solid rgb(20 184 166);
+}
+</style>
+
+<style>
+#regLogo
+{
+  height: 200px;
+}
+
+h1
+{
+  text-align: center;
+  font-size: 4rem;
+  color: black;
+  font-family: 'Abhaya Libre', serif;
+  border-bottom: 2px solid rgb(20 184 166);
+  margin-bottom: 2rem;
+}
+#boxRegisLogo
+{
+  width: 100%;
+  background-color: rgb(20 184 166);
+}
+
+#boxRegis
+{
+  width: 800px;
+  border: 2px solid rgb(20 184 166);
+  justify-content: center;
+}
+
+.row 
+{
+  --bs-gutter-x: 1.5rem;
+  --bs-gutter-y: 0;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: calc(-1 * var(--bs-gutter-y));
+  margin-right: calc(-.5 * var(--bs-gutter-x));
+  margin-left: calc(-.5 * var(--bs-gutter-x));
+  margin-bottom: 10px;
+  font-family: 'Roboto Mono', monospace;
+  color: black;
+  
+}
+
+[type='text'], [type='email'], [type='url'], [type='password'], [type='number'], [type='date'], [type='datetime-local'], [type='month'], [type='search'], [type='tel'], [type='time'], [type='week'], [multiple], textarea, select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: #def2f1;
+    border-color: rgb(20 184 166);
+    border-width: 1px;
+    border-radius: 10px;
+    padding-top: 0.5rem;
+    padding-right: 0.75rem;
+    padding-bottom: 0.5rem;
+    padding-left: 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5rem;
 }
 </style>
