@@ -44,8 +44,8 @@ export default {
         credentials: 'include'
       };
       var data = await fetch("http://localhost:5000/logged", request)
-      data = await data.text();
-      if (data == 'logg out') {
+      data = await data.json();
+      if (data.message == 'logged out') {
         localStorage.removeItem('username');
         alert('¡Sesión cerrada con exito!');
         window.location = '/';
