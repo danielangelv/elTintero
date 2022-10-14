@@ -2,7 +2,7 @@
   <nav class="navbar bg-light">
     <div class="container-fluid" v-if="username !== null">
         <router-link class="navbar-brand" to="/">Inicio</router-link> |
-        {{username}} |
+        hola soy {{username}} |
         <button class="btn btn-outline-success" @click="logout">Cerrar Sesión</button>
         <form class="d-flex" role="search">
           <input
