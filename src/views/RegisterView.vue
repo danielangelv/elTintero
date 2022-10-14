@@ -10,7 +10,7 @@
         <h1>Registrate</h1>
       </div>
       <div class="row">
-        <div class="col-md-6-md-6">
+        <div class="col-md-6">
           <label for="Name" class="form-label">Nombre Completo</label>
           <input type="text" class="form-control" id="Name" />
         </div>
@@ -68,7 +68,7 @@
         </div>
       </div>
       <div id="btonRegis" class="text-center mt-6">
-        <button class="text-black text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" style="background-col-md-6or: rgb(20 184 166)" @click="login">
+        <button class="text-black text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" style="background-color: rgb(20 184 166)" @click="login">
           Registrate
         </button>
       </div>

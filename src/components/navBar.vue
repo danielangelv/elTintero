@@ -17,7 +17,8 @@
     <div class="container-fluid" v-else>
         <router-link class="navbar-brand" to="/">Inicio</router-link> |
         <router-link class="navbar-brand" to="/login">Iniciar Sesión</router-link> |
-        <router-link class="navbar-brand" to="/register">Registro</router-link>
+        <router-link class="navbar-brand" to="/register">Registro</router-link> |
+        <router-link class="navbar-brand" to="/createBook">Crear Libro</router-link>
         <form class="d-flex" role="search">
           <input
             class="form-control me-2"

@@ -16,6 +16,14 @@ export default
 };
 </script>
 <style>
+
+footer
+{
+  bottom: auto;
+  position: absolute !important;
+  width: 100%;
+}
+
 #regLogo
 {
   height: 200px;

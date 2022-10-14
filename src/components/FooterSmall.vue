@@ -52,5 +52,8 @@ export default {
 <style>
 .footer {
   background-color: black;
+  bottom: end;
+  position: absolute !important;
+  width: 100%;
 }
 </style>
