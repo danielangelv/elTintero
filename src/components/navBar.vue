@@ -19,7 +19,7 @@ export default {
         mode: "cors",
         credentials: 'include'
       };
-      var data = await fetch("http://localhost:5000/logged", request)
+      var data = await fetch("http://localhost:5000/loggout", request)
       data = await data.json();
       if (data.message == 'logged out') {
         localStorage.removeItem('username');

@@ -123,7 +123,7 @@ h1 {
   margin-bottom: 2rem;
 }
 
-[type='text'],
+input [type='text'],
 [type='email'],
 [type='url'],
 [type='password'],
@@ -135,9 +135,7 @@ h1 {
 [type='tel'],
 [type='time'],
 [type='week'],
-[multiple],
-textarea,
-select {
+[multiple]{
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
