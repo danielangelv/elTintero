@@ -1,6 +1,6 @@
 <template>
   <footer
-    class="pb-6 footer"
+    class="pb-6 footer border-solid border-red-900 border-8"
     :class="[
       absolute ? 'absolute w-full bottom-0 bg-blueGray-800' : 'relative',
     ]"
@@ -53,7 +53,7 @@ export default {
 .footer {
   background-color: black;
   bottom: end;
-  position: absolute !important;
   width: 100%;
+  position: absolute;
 }
 </style>

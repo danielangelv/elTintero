@@ -91,12 +91,6 @@ export default {
 </script>
 
 <style>
-footer
-{
-  bottom: auto;
-  position: absolute !important;
-  width: 100%;
-}
 
 #posicionCajaLogin {
   height: 40em;
