@@ -3,127 +3,126 @@
     <div class="relative rounded-xl overflow-auto p-3">
       <img src="../assets/logo.png" class="text-center rounded-lg overflow-hidden w-56 sm:w-20 mx-auto">
     </div>
-    <form>
-      <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col">
-        <div class="-mx-3 md:flex mb-6">
-          <div class="md:w-1/2 px-3 mb-6 md:mb-0">
-            <label v-bind:class="generic_labels_styles" for="name">
-              Nombre completo*
-            </label>
-            <input v-model="name" v-bind:class="generic_input_styles" id="name" type="text" placeholder="Pepito Perez Marques"
-              v-bind:style="input_font_color">
-          </div>
-          <div class="md:w-1/2 px-3">
-            <label v-bind:class="generic_labels_styles" for="identification">
-              Identificación*
-            </label>
-            <input v-model="id" v-bind:class="generic_input_styles" id="identification" type="number" placeholder="1088559554"
-              v-bind:style="input_font_color">
-          </div>
+    <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col">
+      <div class="-mx-3 md:flex mb-6">
+        <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+          <label v-bind:class="generic_labels_styles" for="name">
+            Nombre completo*
+          </label>
+          <input v-model="name" v-bind:class="generic_input_styles" id="name" type="text"
+            placeholder="Pepito Perez Marques" v-bind:style="input_font_color">
         </div>
-        <div class="-mx-3 md:flex mb-6">
-          <div class="md:w-1/2 px-3 mb-6 md:mb-0">
-            <label v-bind:class="generic_labels_styles" for="user">
-              Usuario*
-            </label>
-            <input v-model="user" v-bind:class="generic_input_styles" id="user" type="text" placeholder="pepito_perez1"
-              v-bind:style="input_font_color">
-          </div>
-          <div class="md:w-1/2 px-3">
-            <label v-bind:class="generic_labels_styles" for="password">
-              Contraseña*
-            </label>
-            <input v-model="password" v-bind:class="generic_input_styles" id="password" type="password" placeholder="***"
-              v-bind:style="input_font_color">
-          </div>
-        </div>
-        <div class="-mx-3 md:flex mb-6">
-          <div class="md:w-1/2 px-3 mb-6 md:mb-0">
-            <label v-bind:class="generic_labels_styles" for="phoneNumber">
-              Número de teléfono*
-            </label>
-            <input v-model="phoneNumber" v-bind:class="generic_input_styles" id="phonerNumber" type="number" name="tel" min="300"
-              placeholder="311585984" v-bind:style="input_font_color">
-          </div>
-          <div class="md:w-1/2 px-3">
-            <label v-bind:class="generic_labels_styles" for="mailingAddress">
-              Dirección de correspondencia*
-            </label>
-            <input v-model="mailingAddress" v-bind:class="generic_input_styles" id="mailingAddress" type="text" placeholder="Carrera 11 #23-11"
-              v-bind:style="input_font_color">
-          </div>
-        </div>
-        <div class="-mx-3 md:flex mb-6">
-          <div class="md:w-1/2 px-3 mb-6 md:mb-0">
-            <label v-bind:class="generic_labels_styles" for="birthDate">
-              Fecha de nacimiento*
-            </label>
-            <input v-model="birthDate" v-bind:class="generic_input_styles" type="date" min="1900-01-01" max="2030-01-01" id="birthDate"
-              placeholder="01/01/2000" v-bind:style="input_font_color">
-          </div>
-          <div class="md:w-1/2 px-3">
-            <label v-bind:class="generic_labels_styles" for="birthPlace">
-              Lugar de nacimiento*
-            </label>
-            <input v-model="birthPlace" v-bind:class="generic_input_styles" id="birthPlace" type="text" placeholder="Pereira/Risaralda"
-              v-bind:style="input_font_color">
-          </div>
-        </div>
-        <div class="-mx-3 md:flex mb-6">
-          <div class="md:w-1/2 px-3 mb-6 md:mb-0">
-            <label v-bind:class="generic_labels_styles" for="gender">
-              Género*
-            </label>
-            <div>
-              <select v-model="gender" v-bind:class="generic_input_styles" id="gender" type="text" placeholder="Masculino"
-                v-bind:style="input_font_color">
-                <option>Masculino</option>
-                <option>Femenino</option>
-                <option>Otro</option>
-              </select>
-            </div>
-          </div>
-          <div class="md:w-1/2 px-3 mb-6 md:mb-0">
-            <label v-bind:class="generic_labels_styles" for="email">
-              Email*
-            </label>
-            <input v-bind:class="generic_input_styles" id="email" type="email" placeholder="Pepito0102@eltintero.com"
-              v-bind:style="input_font_color">
-          </div>
-        </div>
-        <div class="-mx-3 mb-full">
-          <div>
-            <label v-bind:class="generic_labels_styles">
-              Temas literarios de preferencia*
-            </label>
-            <ul class="items-center w-full text-sm font-medium rounded-lg sm:flex flex-wrap"
-              style="background-color: #def2f1; border: 1px solid rgb(20 184 166);">
-              <li v-for="topic in allowed_topics" v-bind:key="topic"
-                class=" border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600 domain_checkbox">
-                <div class="flex items-center p-3 w-full">
-                  <input v-model="choseen_topics" v-bind:id="topic" type="checkbox" v-bind:value="topic"
-                    class="text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                  <label v-bind:for="topic"
-                    class=" w-full text-sm font-medium text-gray-900 dark:text-gray">{{topic}}</label>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="-mx-3 md:flex mt-9 md:w-full px-3 text-center">
-          <button
-            class=" md:w-full font-bold py-2 px-4 border-b-4 hover:border-b-4 border-gray-500 hover:border-black rounded-full"
-            style="background-color: #14b8a6; color:black;">
-            Registrate
-          </button>
+        <div class="md:w-1/2 px-3">
+          <label v-bind:class="generic_labels_styles" for="identification">
+            Identificación*
+          </label>
+          <input v-model="id" v-bind:class="generic_input_styles" id="identification" type="text"
+            placeholder="1088559554" v-bind:style="input_font_color">
         </div>
       </div>
-    </form>
+      <div class="-mx-3 md:flex mb-6">
+        <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+          <label v-bind:class="generic_labels_styles" for="user">
+            Usuario*
+          </label>
+          <input v-model="user" v-bind:class="generic_input_styles" id="user" type="text" placeholder="pepito_perez1"
+            v-bind:style="input_font_color">
+        </div>
+        <div class="md:w-1/2 px-3">
+          <label v-bind:class="generic_labels_styles" for="password">
+            Contraseña*
+          </label>
+          <input v-model="password" v-bind:class="generic_input_styles" id="password" type="password" placeholder="***"
+            v-bind:style="input_font_color">
+        </div>
+      </div>
+      <div class="-mx-3 md:flex mb-6">
+        <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+          <label v-bind:class="generic_labels_styles" for="phoneNumber">
+            Número de teléfono*
+          </label>
+          <input v-model="phoneNumber" v-bind:class="generic_input_styles" id="phonerNumber" type="tel" name="tel"
+            min="300" placeholder="311585984" v-bind:style="input_font_color">
+        </div>
+        <div class="md:w-1/2 px-3">
+          <label v-bind:class="generic_labels_styles" for="mailingAddress">
+            Dirección de correspondencia*
+          </label>
+          <input v-model="mailingAddress" v-bind:class="generic_input_styles" id="mailingAddress" type="text"
+            placeholder="Carrera 11 #23-11" v-bind:style="input_font_color">
+        </div>
+      </div>
+      <div class="-mx-3 md:flex mb-6">
+        <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+          <label v-bind:class="generic_labels_styles" for="birthDate">
+            Fecha de nacimiento*
+          </label>
+          <input v-model="birthDate" v-bind:class="generic_input_styles" type="date" min="1900-01-01" max="2030-01-01"
+            id="birthDate" placeholder="01/01/2000" v-bind:style="input_font_color">
+        </div>
+        <div class="md:w-1/2 px-3">
+          <label v-bind:class="generic_labels_styles" for="birthPlace">
+            Lugar de nacimiento*
+          </label>
+          <input v-model="birthPlace" v-bind:class="generic_input_styles" id="birthPlace" type="text"
+            placeholder="Pereira/Risaralda" v-bind:style="input_font_color">
+        </div>
+      </div>
+      <div class="-mx-3 md:flex mb-6">
+        <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+          <label v-bind:class="generic_labels_styles" for="gender">
+            Género*
+          </label>
+          <div>
+            <select v-model="gender" v-bind:class="generic_input_styles" id="gender" type="text" placeholder="Masculino"
+              v-bind:style="input_font_color">
+              <option>Masculino</option>
+              <option>Femenino</option>
+              <option>Otro</option>
+            </select>
+          </div>
+        </div>
+        <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+          <label v-bind:class="generic_labels_styles" for="email">
+            Email*
+          </label>
+          <input v-bind:class="generic_input_styles" id="email" type="email" placeholder="Pepito0102@eltintero.com"
+            v-bind:style="input_font_color">
+        </div>
+      </div>
+      <div class="-mx-3 mb-full">
+        <div>
+          <label v-bind:class="generic_labels_styles">
+            Temas literarios de preferencia*
+          </label>
+          <ul class="items-center w-full text-sm font-medium rounded-lg sm:flex flex-wrap"
+            style="background-color: #def2f1; border: 1px solid rgb(20 184 166);">
+            <li v-for="topic in allowed_topics" v-bind:key="topic"
+              class=" border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600 domain_checkbox">
+              <div class="flex items-center p-3 w-full">
+                <input v-model="choseen_topics" v-bind:id="topic" type="checkbox" v-bind:value="topic"
+                  class="text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                <label v-bind:for="topic"
+                  class=" w-full text-sm font-medium text-gray-900 dark:text-gray">{{topic}}</label>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="-mx-3 md:flex mt-9 md:w-full px-3 text-center">
+        <button
+          class=" md:w-full font-bold py-2 px-4 border-b-4 hover:border-b-4 border-gray-500 hover:border-black rounded-full"
+          style="background-color: #14b8a6; color:black;" @click="register">
+          Registrate
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 
 
 <script>
+
 export default {
   data() {
     return {
@@ -137,13 +136,46 @@ export default {
       email: "",
       phoneNumber: "",
       password: "",
-      malingAddress: "",
+      mailingAddress: "",
       birthDate: "",
       birthPlace: "",
       gender: "",
       choseen_topics: [],
       allowed_topics: ["Mitología", "Aventuras", "Ciencia Ficción", "Terror y Misterio", "Romántica"]
     };
+  },
+  methods: {
+    register: async function (e) {
+      console.log(e);
+      this.password = window.btoa(this.password);
+      const payload = {
+        "name": this.name,
+        "last_name": "",
+        "birth_date": this.birth_date,
+        "gender": this.gender,
+        "email": this.email,
+        "user": this.user,
+        "password": this.password,
+        "messaging_addres": this.mailingAddress,
+        "birth_place": this.birth_place
+      };
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Access-Control-Allow-Headers": '*', "Access-Control-Expose-Headers": '*' },
+        mode: "cors",
+        body: JSON.stringify(payload),
+        credentials: 'include'
+      };
+      let data = await fetch("http://localhost:5000/register", requestOptions)
+      const answer = await data.json();
+      if (answer.message == 'succesfull login') {
+        localStorage.setItem('username', this.user);
+        alert('¡Inicio de Sesión Exitoso!');
+        window.location = '/';
+      }else{
+        alert("No se pudo crear el usuario intente de nuevo")
+      }
+    }
   }
 }
 </script>
