@@ -69,21 +69,21 @@ export default {
       this.password = window.btoa(this.password);
       const requestOptions = {
         method: "POST",
-        headers: { "Content-Type": "application/json", "Access-Control-Allow-Headers":'*', "Access-Control-Expose-Headers":'*' },
+        headers: { "Content-Type": "application/json", "Access-Control-Allow-Headers": '*', "Access-Control-Expose-Headers": '*' },
         mode:"cors",
-        body: JSON.stringify({ username: this.user, password: this.password }),
+        body: JSON.stringify({ "username": this.user, "password": this.password }),
         credentials: 'include'
       };
-      let data = await fetch("http://localhost:5000/login", requestOptions)
-      const respuesta = await data.json();
-      if (respuesta.message == 'wrong password or username') {
-        return alert('¡Usuario o Contraseña incorrecto!');
-      }
-      if (respuesta.message == 'succesfull login') 
-      {
-        localStorage.setItem('username',this.user);
+      const data = await fetch("http://localhost:5000/login", requestOptions);
+      console.log(data)
+      if (data.status === 200) {
+        const answer = await data.json();
+        console.log(answer)
+        localStorage.setItem('userInFormation', JSON.stringify(answer.data));
         alert('¡Inicio de Sesión Exitoso!');
         window.location = '/';
+      }else{
+        return alert('¡Usuario o Contraseña incorrecto!');
       }
     }
   }

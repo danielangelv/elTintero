@@ -1,9 +1,11 @@
 <template>
   <nav class="flex flex-row">
+      <router-link v-if="user" class="basis-1/4 box-content h-5 text-zinc-100" to="/">{{user.name}}</router-link>
       <router-link  class="basis-1/4 box-content h-5 text-zinc-100" to="/">Inicio</router-link>
-      <router-link  class="basis-1/4 box-content h-5 text-zinc-100" to="/login">Iniciar Sesion</router-link>
-      <router-link  class="basis-1/4 box-content h-5 text-zinc-100" to="/register">Registro</router-link>
-      <router-link  class="basis-1/4 box-content h-5 text-zinc-100" to="/createBook">Crear libro</router-link>
+      <router-link v-if="!user" class="basis-1/4 box-content h-5 text-zinc-100" to="/login">Iniciar Sesion</router-link>
+      <router-link v-if="!user" class="basis-1/4 box-content h-5 text-zinc-100" to="/register">Registro</router-link>
+      <router-link  v-if="user && user.auth_helper.includes('CRUD_BOOKS')" class="basis-1/4 box-content h-5 text-zinc-100" to="/createBook">Crear libro</router-link>
+      <button v-if="user" class="basis-1/4 box-content h-5 text-zinc-100" @click="logout">Cerrar sesion</button>
   </nav>
 </template>
 
@@ -20,19 +22,22 @@ export default {
         credentials: 'include'
       };
       var data = await fetch("http://localhost:5000/loggout", request)
-      data = await data.json();
-      if (data.message == 'logged out') {
-        localStorage.removeItem('username');
+      
+      if (data.status === 200) {
+        data = await data.json();
+        localStorage.removeItem('userInFormation');
         alert('¡Sesión cerrada con exito!');
         window.location = '/';
+      }else{
+        alert("No se pudo cerrar la session");
       }
     }
   },
   data() {
     return {
-      "username": localStorage.getItem('username'),
+      "user":JSON.parse(localStorage.getItem('userInFormation')),
     }
-  }
+  },
 };
 </script>
 <style>

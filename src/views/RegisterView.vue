@@ -87,7 +87,7 @@
             Email*
           </label>
           <input v-bind:class="generic_input_styles" id="email" type="email" placeholder="Pepito0102@eltintero.com"
-            v-bind:style="input_font_color">
+            v-bind:style="input_font_color" v-model="email">
         </div>
       </div>
       <div class="-mx-3 mb-full">
@@ -132,7 +132,6 @@ export default {
       user: "",
       name: "",
       id: "",
-      username: "",
       email: "",
       phoneNumber: "",
       password: "",
@@ -151,13 +150,13 @@ export default {
       const payload = {
         "name": this.name,
         "last_name": "",
-        "birth_date": this.birth_date,
+        "birth_date": this.birthDate,
         "gender": this.gender,
         "email": this.email,
         "user": this.user,
         "password": this.password,
         "messaging_addres": this.mailingAddress,
-        "birth_place": this.birth_place
+        "birth_place": this.birtPlace
       };
       const requestOptions = {
         method: "POST",
@@ -166,13 +165,15 @@ export default {
         body: JSON.stringify(payload),
         credentials: 'include'
       };
+      
       let data = await fetch("http://localhost:5000/register", requestOptions)
-      const answer = await data.json();
-      if (answer.message == 'succesfull login') {
-        localStorage.setItem('username', this.user);
+      if (data.status === 200 || data.status === 201){
+        const answer = await data.json();
+        localStorage.setItem('userInFormation', JSON.stringify(answer.data));
         alert('¡Inicio de Sesión Exitoso!');
         window.location = '/';
-      }else{
+      }
+      else{
         alert("No se pudo crear el usuario intente de nuevo")
       }
     }
