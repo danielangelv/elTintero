@@ -1,13 +1,13 @@
 <template>
 
-    <div id="boxCrearLibro" class="container_crearLibro">
+    <div id="boxCrearLibro" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
 
-        <div class="crear_libro">
+        <div class="col-span-3 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             <h1>Crear Libro</h1>
 
         </div>
 
-        <div class="row  pl-3">
+        <div class="row-start-2 row-span-2">
 
             <div>
                 <label for="Sinopsis" class="form-label">Sinopsis: </label><br>
@@ -70,7 +70,7 @@
 
         </div>
 
-        <div class="subir_img  pl-5">
+        <div class="col-start-2 row-start-2">
             <label for="Sinopsis" class="form-label">Portada: </label><br><br>
             <input type="file" id="seleccionArchivos" accept="image/*" @change="subir_img">
             <br><br>
@@ -78,7 +78,7 @@
 
         </div>
 
-        <div class="row_end  pl-5">
+        <div class="row-start-2 col-start-3">
             <div>
                 <label for="Titulo">Titulo:</label>
                 <input type="text" class="form-control" id="Titulo" />
@@ -133,39 +133,4 @@ export default {
     background-color: white;
 }
 
-.container_crearLibro {
-    display: grid;
-
-}
-
-.container_crearLibro div {
-    grid-template-columns: auto auto auto;
-    grid-template-rows: auto auto auto;
-}
-
-.crear_libro {
-    grid-column: 1 / span 3;
-}
-
-.row {
-    grid-column: 1 / span 1;
-    grid-row: 2 / span 2;
-}
-
-.ubir_img {
-    grid-column: 2 / span 1;
-    grid-row: 2 / span 2;
-}
-
-.row_end {
-    grid-column: 3 / span 1;
-    grid-row: 2 / span 2;
-}
-
-/*#boxCrearLibro {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-evenly;
-}*/
 </style>
