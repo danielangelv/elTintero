@@ -90,7 +90,7 @@
             v-bind:style="input_font_color" v-model="email">
         </div>
       </div>
-      <div class="-mx-3 mb-full">
+      <div class="-mx-0.5 mb-full">
         <div>
           <label v-bind:class="generic_labels_styles">
             Temas literarios de preferencia*
@@ -128,7 +128,7 @@ export default {
     return {
       generic_input_styles: "w-full bg-gray-200 border border-gray-200 rounded py-3 px-4 mb-1",
       generic_labels_styles: "uppercase tracking-wide text-black text-xs font-bold mb-2",
-      input_font_color: "color:black",
+      input_font_color: "color:black; appearance: none;background-color: #def2f1;border-color: rgb(20 184 166);border-width: 1px;border-radius: 10px;padding-top: 0.5rem;padding-right: 0.75rem;padding-bottom: 0.5rem;padding-left: 0.75rem;font-size: 1rem;line-height: 1.5rem;",
       user: "",
       name: "",
       id: "",
@@ -188,5 +188,20 @@ export default {
 
 .view-container {
   background-color: rgb(20 184 166)
+}
+
+.gender
+{
+  appearance: none;
+  background-color: #def2f1;
+  border-color: rgb(20 184 166);
+  border-width: 1px;
+  border-radius: 10px;
+  padding-top: 0.5rem;
+  padding-right: 0.75rem;
+  padding-bottom: 0.5rem;
+  padding-left: 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
 }
 </style>
