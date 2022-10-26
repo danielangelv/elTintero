@@ -4,6 +4,9 @@
       <img src="../assets/logo.png" class="text-center rounded-lg overflow-hidden w-56 sm:w-20 mx-auto">
     </div>
     <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col">
+      <div>
+        <h1>Registrate</h1>
+      </div>
       <div class="-mx-3 md:flex mb-6">
         <div class="md:w-1/2 px-3 mb-6 md:mb-0">
           <label v-bind:class="generic_labels_styles" for="name">
@@ -70,7 +73,7 @@
       </div>
       <div class="-mx-3 md:flex mb-6">
         <div class="md:w-1/2 px-3 mb-6 md:mb-0">
-          <label v-bind:class="generic_labels_styles" for="gender">
+          <label v-bind:class="generic_labels_styles" class="" for="gender">
             Género*
           </label>
           <div>
@@ -126,7 +129,7 @@
 export default {
   data() {
     return {
-      generic_input_styles: "w-full bg-gray-200 border border-gray-200 rounded py-3 px-4 mb-1",
+      generic_input_styles: "w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-1",
       generic_labels_styles: "uppercase tracking-wide text-black text-xs font-bold mb-2",
       input_font_color: "color:black; appearance: none;background-color: #def2f1;border-color: rgb(20 184 166);border-width: 1px;border-radius: 10px;padding-top: 0.5rem;padding-right: 0.75rem;padding-bottom: 0.5rem;padding-left: 0.75rem;font-size: 1rem;line-height: 1.5rem;",
       user: "",
@@ -180,6 +183,7 @@ export default {
   }
 }
 </script>
+
 <style>
 .domain_checkbox {
   border-right: 1px solid rgb(20 184 166);
@@ -190,18 +194,4 @@ export default {
   background-color: rgb(20 184 166)
 }
 
-.gender
-{
-  appearance: none;
-  background-color: #def2f1;
-  border-color: rgb(20 184 166);
-  border-width: 1px;
-  border-radius: 10px;
-  padding-top: 0.5rem;
-  padding-right: 0.75rem;
-  padding-bottom: 0.5rem;
-  padding-left: 0.75rem;
-  font-size: 1rem;
-  line-height: 1.5rem;
-}
 </style>
