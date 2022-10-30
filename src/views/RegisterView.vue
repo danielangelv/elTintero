@@ -93,28 +93,10 @@
             v-bind:style="input_font_color" v-model="email">
         </div>
       </div>
-      <div class="-mx-0.5 mb-full">
-        <div>
-          <label v-bind:class="generic_labels_styles">
-            Temas literarios de preferencia*
-          </label>
-          <ul class="items-center w-full text-sm font-medium rounded-lg sm:flex flex-wrap"
-            style="background-color: #def2f1; border: 1px solid rgb(20 184 166);">
-            <li v-for="topic in allowed_topics" v-bind:key="topic"
-              class=" border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600 domain_checkbox">
-              <div class="flex items-center p-3 w-full">
-                <input v-model="choseen_topics" v-bind:id="topic" type="checkbox" v-bind:value="topic"
-                  class="text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                <label v-bind:for="topic"
-                  class=" w-full text-sm font-medium text-gray-900 dark:text-gray">{{topic}}</label>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
+      <FormTopics></FormTopics>
       <div class="-mx-3 md:flex mt-9 md:w-full px-3 text-center">
         <button
-          class=" md:w-full font-bold py-2 px-4 border-b-4 hover:border-b-4 border-gray-500 hover:border-black rounded-full"
+          class="md:w-full font-bold py-2 px-4 border-b-4 hover:border-b-4 border-gray-500 hover:border-black rounded-full"
           style="background-color: #14b8a6; color:black;" @click="register">
           Registrate
         </button>
@@ -125,8 +107,11 @@
 
 
 <script>
-
+import FormTopics from "@/components/formTopics.vue";
 export default {
+  components: {
+    FormTopics
+  },
   data() {
     return {
       generic_input_styles: "w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-1",
@@ -142,8 +127,6 @@ export default {
       birthDate: "",
       birthPlace: "",
       gender: "",
-      choseen_topics: [],
-      allowed_topics: ["Mitología", "Aventuras", "Ciencia Ficción", "Terror y Misterio", "Romántica"]
     };
   },
   methods: {
