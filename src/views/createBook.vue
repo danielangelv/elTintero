@@ -60,7 +60,7 @@
                     <label>Ingrese la cantidad de libros disponibles:</label>
                     <button @click="sum">+</button>
                     <input v-model="number" type="number" min="1">
-                    <button @click="sum">-</button>
+                    <button @click="minus">-</button>
                 </div>
             </div>
         </div>
