@@ -1,10 +1,23 @@
 <template>
   <div class="home">
     <LogoSlogan/>
+  
+    <div v-for="libro in libros" v-bind:key="libro.nombre" class="grid grid-cols-4 bg-red-500 border-3 border-blue-600 ">
+      <div class="grid grid-cols-1 bg-blue-500">
+        <div class="grid grid-cols-1 ">{{libro.nombre}}</div>
+        <div class="grid grid-cols-1 ">{{libro.precio}}</div>
+        <div class="grid grid-cols-1 ">{{libro.cantidad}}</div>
+      </div>
+      
+      
+    
+    </div>
   </div>
+
 </template>
 
 <script>
+
 import LogoSlogan from "@/components/LogoSlogan.vue"
 
 export default 
@@ -12,11 +25,16 @@ export default
   components: 
   {
     LogoSlogan
-  }
+  },
+    data () {
+    return {
+      libros:[{nombre:"id",precio:"23.000",cantidad:"45"},{nombre:"libro1",precio:"23.000",cantidad:"45"}]
+      }
+
+    }
 };
 </script>
 <style>
-
 
 #regLogo
 {
