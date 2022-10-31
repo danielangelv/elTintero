@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-white">
+    <div class="bg-gray-100 mx-auto max-w-6xl bg-white py-5 px-5 lg:px-10 shadow-xl mb-10 bg-white">
         <h1>Crear Libro</h1>
         <div class="grid grid-cols-3 gap-4">
             <div>
@@ -130,4 +130,5 @@ export default {
     color: black;
     background-color: white;
 }
+
 </style>
