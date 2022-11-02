@@ -7,180 +7,26 @@
         <h2 class="text-2xl font-bold tracking-tight text-gray-900">Libros</h2>
 
         <div class="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-          <div class="group relative">
+          <div v-for="libro in libros" v-bind:key="libro.id" class="group relative">
             <div class="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
-              <img src="../assets/Caso-Alaska-Sanders.png" alt="Front of men&#039;s Basic Tee in black." class="h-full w-full object-cover object-center lg:h-full lg:w-full">
+              <img v-bind:src="libro.imagen" alt="Front of men&#039;s Basic Tee in black." class="h-full w-full object-cover object-center lg:h-full lg:w-full">
             </div>
             <div class="mt-4 flex justify-between">
               <div>
                 <h3 class="text-sm text-gray-700">
                   <a href="#">
                     <span aria-hidden="true" class="absolute inset-0"></span>
-                    El caso de Alaska Sanders
+                    {{ libro.nombre }}
                   </a>
                 </h3>
-                <p class="mt-1 text-sm text-gray-500">Autor: Joël Dicker</p>
+                <p class="mt-1 text-sm text-gray-500">Autor:{{ libro.autor }}</p>
               </div>
-              <p class="text-sm font-medium text-gray-900">$ 79,000</p>
+              <p class="text-sm font-medium text-gray-900">{{ libro.precio }}</p>
             </div>
           </div>
-
-          <div class="group relative">
-            <div class="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
-              <img src="../assets/Cien_años.png" alt="Front of men&#039;s Basic Tee in black." class="h-full w-full object-cover object-center lg:h-full lg:w-full">
-            </div>
-            <div class="mt-4 flex justify-between">
-              <div>
-                <h3 class="text-sm text-gray-700">
-                  <a href="#">
-                    <span aria-hidden="true" class="absolute inset-0"></span>
-                    Cien años de soledad
-                  </a>
-                </h3>
-                <p class="mt-1 text-sm text-gray-500">Autor: Gabriel García Márquez</p>
-              </div>
-              <p class="text-sm font-medium text-gray-900">$ 70,000</p>
-            </div>
-          </div>
-
-          <div class="group relative">
-            <div class="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
-              <img src="../assets/icono.png" alt="Front of men&#039;s Basic Tee in black." class="h-full w-full object-cover object-center lg:h-full lg:w-full">
-            </div>
-            <div class="mt-4 flex justify-between">
-              <div>
-                <h3 class="text-sm text-gray-700">
-                  <a href="#">
-                    <span aria-hidden="true" class="absolute inset-0"></span>
-                    Nombre libro
-                  </a>
-                </h3>
-                <p class="mt-1 text-sm text-gray-500">Autor</p>
-              </div>
-              <p class="text-sm font-medium text-gray-900">$ Precio</p>
-            </div>
-          </div>
-
-          <div class="group relative">
-            <div class="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
-              <img src="../assets/icono.png" alt="Front of men&#039;s Basic Tee in black." class="h-full w-full object-cover object-center lg:h-full lg:w-full">
-            </div>
-            <div class="mt-4 flex justify-between">
-              <div>
-                <h3 class="text-sm text-gray-700">
-                  <a href="#">
-                    <span aria-hidden="true" class="absolute inset-0"></span>
-                    Nombre libro
-                  </a>
-                </h3>
-                <p class="mt-1 text-sm text-gray-500">Autor</p>
-              </div>
-              <p class="text-sm font-medium text-gray-900">$ Precio</p>
-            </div>
-          </div>
-
-          <div class="group relative">
-            <div class="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
-              <img src="../assets/icono.png" alt="Front of men&#039;s Basic Tee in black." class="h-full w-full object-cover object-center lg:h-full lg:w-full">
-            </div>
-            <div class="mt-4 flex justify-between">
-              <div>
-                <h3 class="text-sm text-gray-700">
-                  <a href="#">
-                    <span aria-hidden="true" class="absolute inset-0"></span>
-                    Nombre libro
-                  </a>
-                </h3>
-                <p class="mt-1 text-sm text-gray-500">Autor</p>
-              </div>
-              <p class="text-sm font-medium text-gray-900">$ Precio</p>
-            </div>
-          </div>
-
-          <div class="group relative">
-            <div class="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
-              <img src="../assets/icono.png" alt="Front of men&#039;s Basic Tee in black." class="h-full w-full object-cover object-center lg:h-full lg:w-full">
-            </div>
-            <div class="mt-4 flex justify-between">
-              <div>
-                <h3 class="text-sm text-gray-700">
-                  <a href="#">
-                    <span aria-hidden="true" class="absolute inset-0"></span>
-                    Nombre libro
-                  </a>
-                </h3>
-                <p class="mt-1 text-sm text-gray-500">Autor</p>
-              </div>
-              <p class="text-sm font-medium text-gray-900">$ Precio</p>
-            </div>
-          </div>
-
-          <div class="group relative">
-            <div class="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
-              <img src="../assets/icono.png" alt="Front of men&#039;s Basic Tee in black." class="h-full w-full object-cover object-center lg:h-full lg:w-full">
-            </div>
-            <div class="mt-4 flex justify-between">
-              <div>
-                <h3 class="text-sm text-gray-700">
-                  <a href="#">
-                    <span aria-hidden="true" class="absolute inset-0"></span>
-                    Nombre libro
-                  </a>
-                </h3>
-                <p class="mt-1 text-sm text-gray-500">Autor</p>
-              </div>
-              <p class="text-sm font-medium text-gray-900">$ Precio</p>
-            </div>
-          </div>
-
-          <div class="group relative">
-            <div class="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
-              <img src="../assets/icono.png" alt="Front of men&#039;s Basic Tee in black." class="h-full w-full object-cover object-center lg:h-full lg:w-full">
-            </div>
-            <div class="mt-4 flex justify-between">
-              <div>
-                <h3 class="text-sm text-gray-700">
-                  <a href="#">
-                    <span aria-hidden="true" class="absolute inset-0"></span>
-                    Nombre libro
-                  </a>
-                </h3>
-                <p class="mt-1 text-sm text-gray-500">Autor</p>
-              </div>
-              <p class="text-sm font-medium text-gray-900">$ Precio</p>
-            </div>
-          </div>
-
-          
-
-          <!-- More products... -->
         </div>
       </div>
     </div>
-
-
-    <!--<div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col">
-      <div class="grid grid-cols-4 gap-8">
-        <div>01</div>
-        <div>02</div>
-        <div>03</div>
-        <div>04</div>
-        <div>05</div>
-        <div>06</div>
-        <div>07</div>
-        <div>08</div>
-      </div>
-    </div>-->
-    
-  
-    <!--<div v-for="libro in libros" v-bind:key="libro.nombre" class="grid grid-cols-4 bg-red-500 border-3 border-blue-600 ">
-      <div class="grid grid-cols-1 bg-blue-500">
-        <div class="grid grid-cols-1 ">{{libro.nombre}}</div>
-        <div class="grid grid-cols-1 ">{{libro.precio}}</div>
-        <div class="grid grid-cols-1 ">{{libro.cantidad}}</div>
-      </div>
-    </div> -->
-
   </div>
 
 </template>
@@ -197,7 +43,7 @@ export default
   },
     data () {
     return {
-      libros:[{nombre:"id",precio:"23.000",cantidad:"45"},{nombre:"libro1",precio:"23.000",cantidad:"45"}]
+      libros: [{ nombre: "l1", precio: "23.000", autor:"Juan velez", imagen:"../assets/Caso-Alaska-Sanders.png"},]
       }
 
     }
