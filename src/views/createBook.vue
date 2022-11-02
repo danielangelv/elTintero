@@ -8,68 +8,67 @@
                 <h3 class="my-2">caracteristicas</h3>
                 <div class="grid grid-cols-2 gap-1">
                     <label for="">Año de edicion</label>
-                    <input v-model="date" type="date" class="w-full" />
+                    <input v-model="date" type="date" class="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" />
                 </div>
                 <div class="grid grid-cols-2 gap-1">
                     <label for="">Tipo</label>
-                    <input v-model="type" type="text" class="w-full" />
+                    <input v-model="type" type="text" class="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))"/>
                 </div>
                 <div class="grid grid-cols-2 gap-1">
                     <label for="">ISXN</label>
-                    <input v-model="isxn" type="text" class="w-full" />
+                    <input v-model="isxn" type="text" class="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))"/>
                 </div>
                 <div class="grid grid-cols-2 gap-1">
                     <label for="">Idioma</label>
-                    <input v-model="language" type="text" class="w-full" />
+                    <input v-model="language" type="text" class="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))"/>
                 </div>
                 <div class="grid grid-cols-2 gap-1">
                     <label for="">Num Paginas</label>
-                    <input v-model="num_pag" type="number" min="1" class="w-full" />
+                    <input v-model="num_pag" type="number" min="1" class="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" />
                 </div>
-                <div class="grid grid-cols-2 gap-1"><label for="">Peso</label><input type="text" class="w-full" />
+                <div class="grid grid-cols-2 gap-1"><label for="">Peso</label><input type="text" class="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" />
                 </div>
                 <div class="grid grid-cols-2 gap-1">
                     <label for="">Tamaño</label>
-                    <input v-model="size" type="text" class="w-full" />
+                    <input v-model="size" type="text" class="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" />
                 </div>
                 <div class="grid grid-cols-2 gap-1">
                     <label for="">Acabado</label>
-                    <input v-model="acabado" type="text" class="w-full" />
+                    <input v-model="acabado" type="text" class="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" />
                 </div>
-                <FormTopics></FormTopics>
+                <FormTopics  ref="topic_ref"></FormTopics>
             </div>
             <div>
                 <h3>portada</h3>
-                <input type="file" id="seleccionArchivos" accept="image/*" @change="subir_img">
+                <input v-if="this.user && this.user.auth_helper.includes('CRUD_BOOKS')" type="file" id="seleccionArchivos" accept="image/*" @change="subir_img">
                 <img id="imagenPrevisualizacion">
             </div>
             <div>
                 <div class="grid grid-cols-2">
-                    <label>Nombre</label><input v-model="nombre" class ="w-full" type="text" />
+                    <label>Nombre</label><input v-model="nombre" class ="w-full" type="text" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" />
                 </div>
                 <div class="grid grid-cols-2">
-                    <label>Autor</label><input v-model="autor" type="text" class ="w-full"/>
+                    <label>Autor</label><input v-model="autor" type="text" class ="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" />
                 </div>
                 <div class="grid grid-cols-2">
-                    <label>Editorial</label><input v-model="editorial" type="text" class ="w-full"/>
+                    <label>Editorial</label><input v-model="editorial" type="text" class ="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" />
                 </div>
                 <div class="grid grid-cols-2">
-                    <label>Precio en pesos</label><input v-model="price" type="text" class ="w-full" />
+                    <label>Precio en pesos</label><input v-model="price" type="text" class ="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" />
                 </div>
                 <div class="grid grid-cols-4">
                     <label>Ingrese la cantidad de libros disponibles:</label>
-                    <button @click="sum">+</button>
-                    <input v-model="number" type="number" min="1">
-                    <button @click="minus">-</button>
+                    <button  v-if=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" @click="sum">+</button>
+                    <input v-model="number" type="number" min="1" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" >
+                    <button v-if="!(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" @click="minus">-</button>
                 </div>
             </div>
         </div>
         <div class="text-center items-center content-center">
             <button
                 class="font-bold py-2 px-4 border-b-4 hover:border-b-4 border-gray-500 hover:border-black rounded-full"
-                style="background-color: #14b8a6; color:black;">Crear</button>
+                style="background-color: #14b8a6; color:black;" @click="crear">Crear</button>
         </div>
-
     </div>
 </template>
 
@@ -92,7 +91,8 @@ export default {
             "size": "",
             "acabado": "",
             "number": 0,
-            "price": ""
+            "price": "",
+            "user": JSON.parse(localStorage.getItem('userInFormation'))
         };
     },
     methods: {
@@ -117,8 +117,50 @@ export default {
             console.log(e)
             this.number = this.number - 1
         },
-        crear: function (e) {
-            console.log(e)
+        read_file: async function() {
+            return new Promise((resolve, reject) => {
+                const seleccionArchivos = document.querySelector("#seleccionArchivos");
+                const reader = new FileReader();
+                reader.readAsDataURL(seleccionArchivos.files[0]);
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = error => reject(error);
+            });
+        },
+        crear: async function (e) {
+            console.log(e);
+            let data = {
+                "sinopsis": this.sinopsis,
+                "isxn": this.isxn,
+                "autor":this.autor,
+                "name":this.nombre,
+                "editorial":this.editorial,
+                "date":this.date,
+                "language":this.language,
+                "num_pag":this.num_pag,
+                "size":this.size,
+                "acabado":this.acabado,
+                "number":this.number,
+                "price":this.price,
+                "topics": this.$refs.topic_ref.choseen_topics,
+                "image":await this.read_file()
+            }
+            const requestOptions = {
+                method: "POST",
+                headers: { "Content-Type": "application/json", "Access-Control-Allow-Headers": '*', "Access-Control-Expose-Headers": '*' },
+                mode: "cors",
+                body: JSON.stringify(data),
+                credentials: 'include'
+            };
+
+            let response = await fetch("http://localhost:5000/book/create", requestOptions)
+            if (response.status === 200 || response.status === 201) {
+                await response.json();
+                alert('libro creado existosamente');
+                window.location = '/createBook';
+            }
+            else {
+                alert("No se pudo crear el libro intente nuevamente")
+            }
         }
     }
 }

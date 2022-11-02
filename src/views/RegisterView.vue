@@ -93,7 +93,7 @@
             v-bind:style="input_font_color" v-model="email">
         </div>
       </div>
-      <FormTopics></FormTopics>
+      <FormTopics ref="topic_ref"></FormTopics>
       <div class="-mx-3 md:flex mt-9 md:w-full px-3 text-center">
         <button
           class="md:w-full font-bold py-2 px-4 border-b-4 hover:border-b-4 border-gray-500 hover:border-black rounded-full"

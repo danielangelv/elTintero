@@ -21,10 +21,11 @@
 <script>
 export default {
     name: "FormTopics",
+    expose:["choseen_topics"],
     data() {
         return {
-            choseen_topics: [],
-            allowed_topics: ["Mitología", "Aventuras", "Ciencia Ficción", "Terror y Misterio", "Romántica"]
+            allowed_topics: ["Mitología", "Aventuras", "Ciencia Ficción", "Terror y Misterio", "Romántica"],
+            choseen_topics: []
         }
     }
 }
