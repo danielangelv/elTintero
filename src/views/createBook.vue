@@ -4,39 +4,47 @@
         <div class="grid grid-cols-3 gap-4">
             <div>
                 <h3>Sinopsis</h3>
-                <textarea v-model="sinopsis" class="w-full"></textarea>
+                <textarea  v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="sinopsis" class="w-full"></textarea>
+                <span v-else>{{ sinopsis }}</span>
                 <h3 class="my-2">caracteristicas</h3>
                 <div class="grid grid-cols-2 gap-1">
                     <label for="">Año de edicion</label>
-                    <input v-model="date" type="date" class="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" />
+                    <input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="date" type="date" class="w-full" v-bind:disabled="!(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" />
+                    <span v-else>{{ date }}</span>
                 </div>
                 <div class="grid grid-cols-2 gap-1">
                     <label for="">Tipo</label>
-                    <input v-model="type" type="text" class="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))"/>
+                    <input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="type" type="text" class="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))"/>
+                    <span v-else>{{ type }}</span>
                 </div>
                 <div class="grid grid-cols-2 gap-1">
                     <label for="">ISXN</label>
-                    <input v-model="isxn" type="text" class="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))"/>
+                    <input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="isxn" type="text" class="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))"/>
+                    <span v-else>{{ isxn }}</span>
                 </div>
                 <div class="grid grid-cols-2 gap-1">
                     <label for="">Idioma</label>
-                    <input v-model="language" type="text" class="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))"/>
+                    <input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="language" type="text" class="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))"/>
+                    <span v-else>{{ language }}</span>
                 </div>
                 <div class="grid grid-cols-2 gap-1">
                     <label for="">Num Paginas</label>
-                    <input v-model="num_pag" type="number" min="1" class="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" />
+                    <input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="num_pag" type="number" min="1" class="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" />
+                    <span v-else>{{ num-pag }}</span>
                 </div>
-                <div class="grid grid-cols-2 gap-1"><label for="">Peso</label><input type="text" class="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" />
+                <div class="grid grid-cols-2 gap-1"><label for="">Peso</label><input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="weight" type="text" class="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" /><span v-else>{{ weight }}</span>
                 </div>
                 <div class="grid grid-cols-2 gap-1">
                     <label for="">Tamaño</label>
-                    <input v-model="size" type="text" class="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" />
+                    <input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="size" type="text" class="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" />
+                    <span v-else>{{ size }}</span>
                 </div>
                 <div class="grid grid-cols-2 gap-1">
                     <label for="">Acabado</label>
-                    <input v-model="acabado" type="text" class="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" />
+                    <input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="acabado" type="text" class="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" />
+                    <span v-else>{{ acabado }}</span>
                 </div>
-                <FormTopics  ref="topic_ref"></FormTopics>
+                <FormTopics  ref="topic_ref" v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))"></FormTopics>
             </div>
             <div>
                 <h3>portada</h3>
@@ -45,29 +53,31 @@
             </div>
             <div>
                 <div class="grid grid-cols-2">
-                    <label>Nombre</label><input v-model="nombre" class ="w-full" type="text" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" />
+                    <label>Nombre</label><input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="nombre" class ="w-full" type="text" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" /><span v-else>{{ acabado }}</span>
                 </div>
                 <div class="grid grid-cols-2">
-                    <label>Autor</label><input v-model="autor" type="text" class ="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" />
+                    <label>Autor</label><input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="autor" type="text" class ="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" /><span v-else>{{ acabado }}</span>
                 </div>
                 <div class="grid grid-cols-2">
-                    <label>Editorial</label><input v-model="editorial" type="text" class ="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" />
+                    <label>Editorial</label><input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="editorial" type="text" class ="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" /><span v-else>{{ acabado }}</span>
                 </div>
                 <div class="grid grid-cols-2">
-                    <label>Precio en pesos</label><input v-model="price" type="text" class ="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" />
+                    <label>Precio en pesos</label><input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="price" type="text" class ="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" /><span v-else>{{ acabado }}</span>
                 </div>
                 <div class="grid grid-cols-4">
                     <label>Ingrese la cantidad de libros disponibles:</label>
-                    <button  v-if=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" @click="sum">+</button>
-                    <input v-model="number" type="number" min="1" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" >
-                    <button v-if="!(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" @click="minus">-</button>
+                    <button  v-if=" (this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" @click="sum">+</button>
+                    <input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="number" type="number" min="1" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" ><span v-else>{{ acabado }}</span>
+                    <button v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" @click="minus">-</button>
                 </div>
             </div>
         </div>
         <div class="text-center items-center content-center">
-            <button
+            <button v-if="$route.params.id" 
                 class="font-bold py-2 px-4 border-b-4 hover:border-b-4 border-gray-500 hover:border-black rounded-full"
                 style="background-color: #14b8a6; color:black;" @click="crear">Crear</button>
+            <button v-else class="font-bold py-2 px-4 border-b-4 hover:border-b-4 border-gray-500 hover:border-black rounded-full"
+                style="background-color: #14b8a6; color:black;" @click="crear">Actualizar</button>
         </div>
     </div>
 </template>
@@ -92,8 +102,38 @@ export default {
             "acabado": "",
             "number": 0,
             "price": "",
+            "weight":"",
+            "id":"",
             "user": JSON.parse(localStorage.getItem('userInFormation'))
         };
+    },
+    async created() {
+        this.$route.params.id
+        if (this.$route.params.id){
+            let response = await fetch(`http://localhost:5000/book/${this.$route.params.id}`)
+            if (response.status === 200 || response.status === 201) {
+                const answer = await response.json();
+                this.id = answer.book.id
+                this.price = answer.book.price
+                this.name = answer.book.name
+                this.editorial = answer.book.editorial
+                this.number = answer.book.quantity
+                this.acabado = answer.book.acabado
+                this.size = answer.book.size
+                this.isxn = answer.book.isxn
+                this.sinopsis = answer.book.sinopsis
+                this.date = answer.book.publication_date
+                this.autor = answer.book.autor
+                this.num_pag = answer.book.number_pages
+                console.log(answer)
+                const imagenPrevisualizacion = document.querySelector("#imagenPrevisualizacion");
+                imagenPrevisualizacion.src = answer.book.img
+            }
+            else {
+                alert("No se pudo crear el libro intente nuevamente")
+            }
+            console.log("codigo")
+        }
     },
     methods: {
         subir_img: function (e) {
@@ -142,7 +182,8 @@ export default {
                 "number":this.number,
                 "price":this.price,
                 "topics": this.$refs.topic_ref.choseen_topics,
-                "image":await this.read_file()
+                "image":await this.read_file(),
+                "weigh":this.weight
             }
             const requestOptions = {
                 method: "POST",
@@ -151,16 +192,28 @@ export default {
                 body: JSON.stringify(data),
                 credentials: 'include'
             };
-
-            let response = await fetch("http://localhost:5000/book/create", requestOptions)
-            if (response.status === 200 || response.status === 201) {
-                await response.json();
-                alert('libro creado existosamente');
-                window.location = '/createBook';
+            if (this.$route.params.id){
+                let response = await fetch("http://localhost:5000/book/create", requestOptions)
+                if (response.status === 200 || response.status === 201) {
+                    await response.json();
+                    alert('libro creado existosamente');
+                    window.location = '/';
+                }
+                else {
+                    alert("No se pudo crear el libro intente nuevamente")
+                }
+            }else{
+                let response = await fetch("http://localhost:5000/book/update", requestOptions)
+                if (response.status === 200 || response.status === 201) {
+                    await response.json();
+                    alert('libro creado existosamente');
+                    window.location = '/';
+                }
+                else {
+                    alert("No se pudo crear el libro intente nuevamente")
+                }
             }
-            else {
-                alert("No se pudo crear el libro intente nuevamente")
-            }
+            
         }
     }
 }

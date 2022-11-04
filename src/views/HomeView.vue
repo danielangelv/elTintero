@@ -2,8 +2,6 @@
   <div class="home">
     <div class="bg-white">
       <div class="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
-        <h2 class="text-2xl font-bold tracking-tight text-gray-900">Libros</h2>
-
         <div class="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
           <div v-for="libro in books" v-bind:key="libro.id" class="group relative">
             <div class="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
@@ -11,11 +9,8 @@
             </div>
             <div class="mt-4 flex justify-between">
               <div>
-                <h3 class="text-sm text-gray-700">
-                  <a href="#">
-                    {{ libro.name }}-{{ libro.editorial }}
-                  </a>
-                </h3>
+                  <router-link class="basis-1/4 box-content h-5 text-black" v-bind:to="`/Book/${libro.id}`">
+                    {{ libro.name }}-{{ libro.editorial }}</router-link>
               </div>
               <p class="text-sm font-medium text-gray-900">{{ libro.precio }}</p>
             </div>
@@ -41,7 +36,7 @@ export default
     }
   },
   async created(){
-    let response = await fetch("http://localhost:5000/book")
+    let response = await fetch('http://localhost:5000/book')
     if (response.status === 200 || response.status === 201) {
       const answer = await response.json();
       this.books = answer.books
