@@ -73,7 +73,7 @@
             </div>
         </div>
         <div class="text-center items-center content-center">
-            <button v-if="$route.params.id" 
+            <button v-if="!$route.params.id"
                 class="font-bold py-2 px-4 border-b-4 hover:border-b-4 border-gray-500 hover:border-black rounded-full"
                 style="background-color: #14b8a6; color:black;" @click="crear">Crear</button>
             <button v-else class="font-bold py-2 px-4 border-b-4 hover:border-b-4 border-gray-500 hover:border-black rounded-full"
@@ -83,6 +83,7 @@
 </template>
 
 <script>
+import snackBar from "@/components/snackBar.vue";
 import FormTopics from "@/components/formTopics.vue";
 export default {
     components: {
@@ -130,7 +131,8 @@ export default {
                 imagenPrevisualizacion.src = answer.book.img
             }
             else {
-                alert("No se pudo crear el libro intente nuevamente")
+                //alert("No se pudo crear el libro intente nuevamente")
+                snackBar.showSnackBar("No se pudo crear el libro, intenta nuevamente")
             }
             console.log("codigo")
         }
@@ -193,27 +195,33 @@ export default {
                 credentials: 'include'
             };
             if (this.$route.params.id){
-                let response = await fetch("http://localhost:5000/book/create", requestOptions)
-                if (response.status === 200 || response.status === 201) {
-                    await response.json();
-                    alert('libro creado existosamente');
-                    window.location = '/';
-                }
-                else {
-                    alert("No se pudo crear el libro intente nuevamente")
-                }
-            }else{
                 let response = await fetch("http://localhost:5000/book/update", requestOptions)
                 if (response.status === 200 || response.status === 201) {
                     await response.json();
-                    alert('libro creado existosamente');
-                    window.location = '/';
+                    snackBar.showSnackBar("Libro actualizado existosamente");
+                    setTimeout(function () {
+                      window.location = '/';
+                    }, 1000);
                 }
                 else {
-                    alert("No se pudo crear el libro intente nuevamente")
+                    //alert("No se pudo crear el libro intente nuevamente")
+                    snackBar.showSnackBar("No se pudo crear el libro, intenta nuevamente");
+                }
+            }else{
+                let response = await fetch("http://localhost:5000/book/create", requestOptions)
+                if (response.status === 200 || response.status === 201) {
+                    await response.json();
+                    //alert('libro creado existosamente');
+                    snackBar.showSnackBar("libro creado existosamente");
+                    setTimeout(function () {
+                      window.location = '/';
+                    }, 1000);
+                }
+                else {
+                  snackBar.showSnackBar("No se pudo crear el libro");
                 }
             }
-            
+
         }
     }
 }

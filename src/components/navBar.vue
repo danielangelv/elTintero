@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import snackBar from "@/components/snackBar.vue";
 export default {
   name: "navBar",
   methods: {
@@ -22,14 +23,18 @@ export default {
         credentials: 'include'
       };
       var data = await fetch("http://localhost:5000/loggout", request)
-      
+
       if (data.status === 200) {
         data = await data.json();
         localStorage.removeItem('userInFormation');
-        alert('¡Sesión cerrada con exito!');
-        window.location = '/';
+        //alert('¡Sesión cerrada con exito!');
+        snackBar.showSnackBar("¡Hasta Pronto!")
+        setTimeout(function () {
+          window.location = '/';
+        }, 1000);
       }else{
-        alert("No se pudo cerrar la session");
+        //alert("No se pudo cerrar la session");
+        snackBar.showSnackBar("No se pudo cerrar sesión, intenta nuevamente!")
       }
     }
   },

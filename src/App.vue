@@ -2,6 +2,7 @@
   <navBar />
   <router-view/>
   <FooterSmall/>
+  <div id="snackbar"></div>
 </template>
 <script>
 import navBar from "@/components/navBar.vue";

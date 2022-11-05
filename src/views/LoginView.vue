@@ -52,6 +52,7 @@
 
 <script>
 import LogoSlogan from "@/components/LogoSlogan.vue";
+import snackBar from "@/components/snackBar.vue";
 export default {
   data() {
     return {
@@ -59,7 +60,7 @@ export default {
       password: "",
     };
   },
-  components: 
+  components:
   {
     LogoSlogan
   },
@@ -74,16 +75,27 @@ export default {
         body: JSON.stringify({ "username": this.user, "password": this.password }),
         credentials: 'include'
       };
-      const data = await fetch("http://localhost:5000/login", requestOptions);
-      console.log(data)
-      if (data.status === 200) {
-        const answer = await data.json();
-        console.log(answer)
-        localStorage.setItem('userInFormation', JSON.stringify(answer.data));
-        alert('¡Inicio de Sesión Exitoso!');
-        window.location = '/';
-      }else{
-        return alert('¡Usuario o Contraseña incorrecto!');
+      try {
+        const data = await fetch("http://localhost:5000/login", requestOptions);
+        console.log(data)
+        if (data.status === 200) {
+          const answer = await data.json();
+          console.log(answer)
+          localStorage.setItem('userInFormation', JSON.stringify(answer.data));
+          //alert('¡Inicio de Sesión Exitoso!');
+          snackBar.showSnackBar("¡Bienvenido nuevamente!")
+          setTimeout(function () {
+            window.location = '/';
+          }, 1000);
+        }else{
+          //return alert('¡Usuario o Contraseña incorrecto!');
+          snackBar.showSnackBar("¡Datos incorrectos!")
+          return;
+
+        }
+      } catch (e) {
+        snackBar.showSnackBar("¡Datos incorrectos!")
+        return;
       }
     }
   }
@@ -141,7 +153,7 @@ h1
   justify-content: center;
 }
 
-.row 
+.row
 {
   --bs-gutter-x: 1.5rem;
   --bs-gutter-y: 0;
@@ -153,7 +165,7 @@ h1
   margin-bottom: 10px;
   font-family: 'Roboto Mono', monospace;
   color: black;
-  
+
 }
 
 [type='text'], [type='email'], [type='url'], [type='password'], [type='number'], [type='date'], [type='datetime-local'], [type='month'], [type='search'], [type='tel'], [type='time'], [type='week'], [multiple], textarea, select {
