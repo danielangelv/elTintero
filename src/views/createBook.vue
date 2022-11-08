@@ -75,9 +75,9 @@
         <div class="text-center items-center content-center">
             <button v-if="!$route.params.id"
                 class="font-bold py-2 px-4 border-b-4 hover:border-b-4 border-gray-500 hover:border-black rounded-full"
-                style="background-color: #14b8a6; color:black;" @click="crear">Crear</button>
-            <button v-else class="font-bold py-2 px-4 border-b-4 hover:border-b-4 border-gray-500 hover:border-black rounded-full"
                 style="background-color: #14b8a6; color:black;" @click="crear">Actualizar</button>
+            <button v-else class="font-bold py-2 px-4 border-b-4 hover:border-b-4 border-gray-500 hover:border-black rounded-full"
+                style="background-color: #14b8a6; color:black;" @click="crear">Crear</button>
         </div>
     </div>
 </template>
