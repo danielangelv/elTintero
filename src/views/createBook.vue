@@ -1,80 +1,88 @@
 <template>
     <div class="bg-gray-100 mx-auto max-w-6xl bg-white py-5 px-5 lg:px-10 shadow-xl mb-10 bg-white">
         <h1>Crear Libro</h1>
-        <div class="grid grid-cols-3 gap-4">
-            <div>
-                <h3>Sinopsis</h3>
+    
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+            <div class="">
+                <h2>Sinopsis</h2>
                 <textarea  v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="sinopsis" class="w-full"></textarea>
                 <span v-else>{{ sinopsis }}</span>
-                <h3 class="my-2">caracteristicas</h3>
-                <div class="grid grid-cols-2 gap-1">
+
+                <h2 class="my-2">Caracteristicas</h2>
+                <div class="grid grid-cols-2 gap-1" style="padding-bottom:1vh;">
                     <label for="">Año de edicion</label>
-                    <input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="date" type="date" class="w-full" v-bind:disabled="!(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" />
+                    <input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="date" type="number" max="2022" class="w-full" v-bind:disabled="!(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" placeholder="2022"/>
                     <span v-else>{{ date }}</span>
                 </div>
-                <div class="grid grid-cols-2 gap-1">
+                <div class="grid grid-cols-2 gap-1" style="padding-bottom:1vh;">
                     <label for="">Tipo</label>
-                    <input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="type" type="text" class="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))"/>
+                    <input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="type" type="text" class="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" placeholder="Libro"/>
                     <span v-else>{{ type }}</span>
                 </div>
-                <div class="grid grid-cols-2 gap-1">
+                <div class="grid grid-cols-2 gap-1" style="padding-bottom:1vh;">
                     <label for="">ISXN</label>
-                    <input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="isxn" type="text" class="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))"/>
+                    <input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="isxn" type="text" class="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" placeholder="9786287525573"/>
                     <span v-else>{{ isxn }}</span>
                 </div>
-                <div class="grid grid-cols-2 gap-1">
+                <div class="grid grid-cols-2 gap-1" style="padding-bottom:1vh;">
                     <label for="">Idioma</label>
-                    <input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="language" type="text" class="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))"/>
+                    <input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="language" type="text" class="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" placeholder="Español"/>
                     <span v-else>{{ language }}</span>
                 </div>
-                <div class="grid grid-cols-2 gap-1">
+                <div class="grid grid-cols-2 gap-1" style="padding-bottom:1vh;">
                     <label for="">Num Paginas</label>
-                    <input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="num_pag" type="number" min="1" class="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" />
+                    <input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="num_pag" type="number" min="1" class="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" placeholder="592"/>
                     <span v-else>{{ num-pag }}</span>
                 </div>
-                <div class="grid grid-cols-2 gap-1"><label for="">Peso</label><input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="weight" type="text" class="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" /><span v-else>{{ weight }}</span>
+                <div class="grid grid-cols-2 gap-1" style="padding-bottom:1vh;">
+                    <label for="">Peso</label>
+                    <input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="weight" type="number" class="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" placeholder="610"/>
+                    <span v-else>{{ weight }}</span>
                 </div>
-                <div class="grid grid-cols-2 gap-1">
+                <div class="grid grid-cols-2 gap-1" style="padding-bottom:1vh;">
                     <label for="">Tamaño</label>
-                    <input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="size" type="text" class="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" />
+                    <input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="size" type="text" class="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" placeholder="15 x 24 cm"/>
                     <span v-else>{{ size }}</span>
                 </div>
-                <div class="grid grid-cols-2 gap-1">
+                <div class="grid grid-cols-2 gap-1" style="padding-bottom:1vh;">
                     <label for="">Acabado</label>
-                    <input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="acabado" type="text" class="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" />
+                    <input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="acabado" type="text" class="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" placeholder="Tapa Rústica"/>
                     <span v-else>{{ acabado }}</span>
                 </div>
-                <FormTopics  ref="topic_ref" v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))"></FormTopics>
             </div>
-            <div>
-                <h3>portada</h3>
+
+            <div class="">
+                <h2>Portada</h2>
                 <input v-if="this.user && this.user.auth_helper.includes('CRUD_BOOKS')" type="file" id="seleccionArchivos" accept="image/*" @change="subir_img">
-                <img id="imagenPrevisualizacion">
+                <img id="imagenPrevisualizacion" style="padding-top:2vh; padding-bottom:2vh;">
             </div>
-            <div>
-                <div class="grid grid-cols-2">
-                    <label>Nombre</label><input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="nombre" class ="w-full" type="text" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" /><span v-else>{{ acabado }}</span>
+
+            <div class="">
+                <div class="grid grid-cols-2" style="padding-bottom:1vh;">
+                    <label>Nombre</label><input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="nombre" class ="w-full" type="text" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" placeholder="El caso de Alaska Sanders"/>
+                    <span v-else>{{ acabado }}</span>
                 </div>
-                <div class="grid grid-cols-2">
-                    <label>Autor</label><input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="autor" type="text" class ="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" /><span v-else>{{ acabado }}</span>
+                <div class="grid grid-cols-2" style="padding-bottom:1vh;">
+                    <label>Autor</label><input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="autor" type="text" class ="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" placeholder="Joël Dicker"/>
+                    <span v-else>{{ acabado }}</span>
                 </div>
-                <div class="grid grid-cols-2">
-                    <label>Editorial</label><input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="editorial" type="text" class ="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" /><span v-else>{{ acabado }}</span>
+                <div class="grid grid-cols-2" style="padding-bottom:1vh;">
+                    <label>Editorial</label><input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="editorial" type="text" class ="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" placeholder="Penguin Random House"/>
+                    <span v-else>{{ acabado }}</span>
                 </div>
-                <div class="grid grid-cols-2">
-                    <label>Precio en pesos</label><input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="price" type="text" class ="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" /><span v-else>{{ acabado }}</span>
+                <div class="grid grid-cols-2" style="padding-bottom:1vh;">
+                    <label>Precio en pesos</label><input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="price" type="text" class ="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" placeholder="79.000"/>
+                    <span v-else>{{ acabado }}</span>
                 </div>
-                <div class="grid grid-cols-4">
-                    <label>Ingrese la cantidad de libros disponibles:</label>
-                    <button  v-if=" (this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" @click="sum">+</button>
-                    <input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="number" type="number" min="1" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" ><span v-else>{{ acabado }}</span>
-                    <button v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" @click="minus">-</button>
+                <div class="grid grid-cols-2" style="padding-bottom:1vh;">
+                    <label>Ingrese la cantidad de libros disponibles:</label><input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="number" type="number" min="1" class ="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" placeholder="5"/>
+                    <span v-else>{{ acabado }}</span>
                 </div>
             </div>
         </div>
-        <div class="text-center items-center content-center">
+        <div class="justify-center text-center items-center content-center">
             <button v-if="!$route.params.id"
-                class="font-bold py-2 px-4 border-b-4 hover:border-b-4 border-gray-500 hover:border-black rounded-full"
+                class="font-bold py-3 px-4 border-b-4 hover:border-b-4 border-gray-500 hover:border-black rounded-full"
                 style="background-color: #14b8a6; color:black;" @click="crear">Actualizar</button>
             <button v-else class="font-bold py-2 px-4 border-b-4 hover:border-b-4 border-gray-500 hover:border-black rounded-full"
                 style="background-color: #14b8a6; color:black;" @click="crear">Crear</button>
@@ -84,11 +92,7 @@
 
 <script>
 import snackBar from "@/components/snackBar.vue";
-import FormTopics from "@/components/formTopics.vue";
 export default {
-    components: {
-        FormTopics
-    },
     data() {
         return {
             "sinopsis": "",
@@ -229,9 +233,39 @@ export default {
 </script>
 
 <style>
+h2
+{
+    font-size: 2rem;
+    color: black;
+    font-family: 'Abhaya Libre', serif;
+}
 #boxCrearLibro {
     color: black;
     background-color: white;
 }
+
+label
+{
+    font-family: 'Roboto Mono', monospace;
+}
+
+[type='file']{
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: #def2f1;
+    border-color: rgb(20 184 166);
+    border-width: 1px;
+    border-radius: 10px;
+    padding-top: 0.5rem;
+    padding-right: 0.75rem;
+    padding-bottom: 0.5rem;
+    padding-left: 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5rem;
+
+}
+    
 
 </style>
