@@ -5,6 +5,7 @@
       <router-link v-if="!user" class="basis-1/4 box-content h-5 text-zinc-100" to="/login">Iniciar Sesion</router-link>
       <router-link v-if="!user" class="basis-1/4 box-content h-5 text-zinc-100" to="/register">Registro</router-link>
       <router-link  v-if="user && user.auth_helper.includes('CRUD_BOOKS')" class="basis-1/4 box-content h-5 text-zinc-100" to="/createBook">Crear libro</router-link>
+      <router-link  v-if="user && user.auth_helper.includes('CREATE_ADMIN_USER')" class="basis-1/4 box-content h-5 text-zinc-100" to="/createAdmi">Crear Administrador</router-link>
       <button v-if="user" class="basis-1/4 box-content h-5 text-zinc-100" @click="logout">Cerrar sesion</button>
   </nav>
 </template>
