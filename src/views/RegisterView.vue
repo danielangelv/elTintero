@@ -36,7 +36,7 @@
             Contraseña*
           </label>
           <input v-model="password" v-bind:class="generic_input_styles" id="password" type="password" placeholder="***"
-            v-bind:style="input_font_color">
+            v-bind:style="input_font_color" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Debe contener al menos un número, una letra mayúscula y minúscula, al menos 8 o más caracteres y no debe contener caracteres especiales" required>
         </div>
       </div>
       <div class="-mx-3 md:flex mb-6">
@@ -60,15 +60,16 @@
           <label v-bind:class="generic_labels_styles" for="birthDate">
             Fecha de nacimiento*
           </label>
-          <input v-model="birthDate" v-bind:class="generic_input_styles" type="date" min="1900-01-01" max="2030-01-01"
+          <input v-model="birthDate" v-bind:class="generic_input_styles" type="date" min="1920-01-01" max="2014-01-01"
             id="birthDate" placeholder="01/01/2000" v-bind:style="input_font_color">
         </div>
         <div class="md:w-1/2 px-3">
           <label v-bind:class="generic_labels_styles" for="birthPlace">
             Lugar de nacimiento*
           </label>
-          <input v-model="birthPlace" v-bind:class="generic_input_styles" id="birthPlace" type="text"
-            placeholder="Pereira/Risaralda" v-bind:style="input_font_color">
+          <div class="autocomplete" style="display: grid;">
+            <input id="birtPlace" type="text" name="birtPlace" placeholder="Pereira, Risaralda">
+          </div>
         </div>
       </div>
       <div class="-mx-3 md:flex mb-6">
@@ -108,12 +109,20 @@
 
 <script>
 import FormTopics from "@/components/formTopics.vue";
+import AutoComplete from "@/components/AutoComplete.vue";
+import snackBar from "@/components/snackBar.vue";
+import DANE from "@/assets/dane.json";
+
+//console.log(DANE);
+var ciudades = DANE.map((e) => e.name+", "+e.department.name);
+
 export default {
   components: {
     FormTopics
   },
   data() {
     return {
+      ciudades,
       generic_input_styles: "w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-1",
       generic_labels_styles: "uppercase tracking-wide text-black text-xs font-bold mb-2",
       input_font_color: "color:black; appearance: none;background-color: #def2f1;border-color: rgb(20 184 166);border-width: 1px;border-radius: 10px;padding-top: 0.5rem;padding-right: 0.75rem;padding-bottom: 0.5rem;padding-left: 0.75rem;font-size: 1rem;line-height: 1.5rem;",
@@ -129,9 +138,42 @@ export default {
       gender: "",
     };
   },
+  async mounted(){
+    var idAutoComplete = document.getElementById('birtPlace');
+    AutoComplete.autocomplete(idAutoComplete, ciudades);
+  },
   methods: {
     register: async function (e) {
-      console.log(e);
+      if (e) {
+        e.preventDefault();
+      }
+      var idAutoComplete = document.getElementById('birtPlace');
+      var ciudad = idAutoComplete.value;
+      var busquedaCiudad = ciudades.find((c) => c == ciudad);
+      if (!busquedaCiudad) {
+        return snackBar.showSnackBar("¡Selecciona una ciudad válida!");
+      }
+      var emailRegex = /^(?:[^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*|"[^\n"]+")@(?:[^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,63}$/i;
+      var passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
+      if (!emailRegex.test(this.email)) {
+        return snackBar.showSnackBar("¡Ingresa un correo válido!");
+      }
+      if (new Date(this.birthDate) < new Date("1920-01-01") || new Date(this.birthDate) > new Date("2014-01-01")) {
+        return snackBar.showSnackBar("¡Ingresa una fecha válida!");
+      }
+      if (!this.name || this.name == "") {
+        return snackBar.showSnackBar("¡Ingresa un nombre válido!");
+      }
+      if (!passwordRegex.test(this.password)) {
+        return snackBar.showSnackBar("¡Ingresa una contraseña válida!");
+      }
+      if (!this.usuario || this.usuario == "") {
+        return snackBar.showSnackBar("¡Ingresa un nombre de usuario válido!");
+      }
+      if (!this.identification || this.identification == "") {
+        return snackBar.showSnackBar("¡Ingresa una identificación válida!");
+      }
+
       this.password = window.btoa(this.password);
       const payload = {
         "name": this.name,
@@ -142,7 +184,7 @@ export default {
         "user": this.user,
         "password": this.password,
         "messaging_addres": this.mailingAddress,
-        "birth_place": this.birtPlace
+        "birth_place": ciudad
       };
       const requestOptions = {
         method: "POST",
@@ -151,12 +193,12 @@ export default {
         body: JSON.stringify(payload),
         credentials: 'include'
       };
-      
+
       let data = await fetch("http://localhost:5000/register", requestOptions)
       if (data.status === 200 || data.status === 201){
         const answer = await data.json();
         localStorage.setItem('userInFormation', JSON.stringify(answer.data));
-        alert('¡Inicio de Sesión Exitoso!');
+        snackBar.showSnackBar("¡Registro Exitoso!");
         window.location = '/';
       }
       else{
