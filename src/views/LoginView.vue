@@ -67,12 +67,11 @@ export default {
   methods: {
     login: async function (e) {
       console.log(e);
-      this.password = window.btoa(this.password);
       const requestOptions = {
         method: "POST",
         headers: { "Content-Type": "application/json", "Access-Control-Allow-Headers": '*', "Access-Control-Expose-Headers": '*' },
         mode:"cors",
-        body: JSON.stringify({ "username": this.user, "password": this.password }),
+        body: JSON.stringify({ "username": this.user, "password": window.btoa(this.password)}),
         credentials: 'include'
       };
       try {
