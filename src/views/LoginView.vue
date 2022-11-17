@@ -35,9 +35,11 @@
                 </button>
               </div>
               <div class="flex flex-wrap mt-6 relative">
-                <a href="javascript:void(0)" class="text-black w-1/2">
+                
+                <RouterLink to="/recuperarContraseña" class="text-black w-1/2">
                   <small>¿Olvidó su clave?</small>
-                </a>
+                </RouterLink>
+                
                 <router-link to="/register" class="text-black w-1/2 text-right">
                   <small>Crear una cuenta</small>
                 </router-link>
