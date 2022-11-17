@@ -58,6 +58,24 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/createAdmi.vue"),
   },
+  {
+    path: "/recuperarContraseña",
+    name: "recuperarContraseña",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/recuperarContraseña.vue"),
+  },
+  {
+    path: "/cambiarContrasena",
+    name: "cambiarContrasena",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/cambiarContrasena.vue"),
+  },
 ];
 
 const router = createRouter({

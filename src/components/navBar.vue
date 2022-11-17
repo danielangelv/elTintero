@@ -1,10 +1,10 @@
 <template>
 <nav class="flex flex-row" style="flex-wrap: nowrap;align-content: center;justify-content: space-between;align-items: center;">
     <router-link v-if="user" class="basis-1/4 box-content h-5 text-zinc-100" to="/">{{user.name}}</router-link>
-    <a href="../views/HomeView.vue" class="flex items-center">
+    <router-link to="/" class="flex items-center">
         <img src="../assets/icono.png" class="h-10 mr-3 sm:h-9" alt="Flowbite Logo" />
         <span class="self-center text-sm font-semibold whitespace-nowrap text-gray-100">El Tintero</span>
-    </a>
+    </router-link>
     <router-link v-if="!user" class="block py-2 pl-3 pr-4 text-gray-100 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-500 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700" style="padding-left: 10vw" to="/login">Iniciar Sesion</router-link>
     <router-link v-if="!user" class="block py-2 pl-3 pr-4 text-gray-100 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-500 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700" style="padding-left: 10vw" to="/register">Registro</router-link>
     <router-link v-if="!user" class="block py-2 pl-3 pr-4 text-gray-100 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-500 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700" style="padding-left: 10vw" to="/editAccount">Editar cuenta</router-link>
