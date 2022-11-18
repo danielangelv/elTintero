@@ -32,7 +32,7 @@
                     <input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="num_pag" type="number" min="1" class="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" />
                     <span v-else>{{ num-pag }}</span>
                 </div>
-                <div class="grid grid-cols-2 gap-1"><label for="">Peso</label><input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="weight" type="text" class="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" /><span v-else>{{ weight }}</span>
+                <div class="grid grid-cols-2 gap-1"><label for="">Peso</label><input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="weight" type="number" class="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" /><span v-else>{{ weight }}</span>
                 </div>
                 <div class="grid grid-cols-2 gap-1">
                     <label for="">Tamaño</label>
