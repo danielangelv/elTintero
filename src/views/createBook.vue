@@ -3,7 +3,7 @@
         <h1>Crear Libro</h1>
     
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-            <div class="">
+            <div class="m-2">
                 <h2>Sinopsis</h2>
                 <textarea  v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="sinopsis" class="w-full"></textarea>
                 <span v-else>{{ sinopsis }}</span>
@@ -11,7 +11,7 @@
                 <h2 class="my-2">Caracteristicas</h2>
                 <div class="grid grid-cols-2 gap-1" style="padding-bottom:1vh;">
                     <label for="">Año de edicion</label>
-                    <input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="date" type="number" max="2022" class="w-full" v-bind:disabled="!(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" placeholder="2022"/>
+                    <input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="date" type="date"  max="2022/12/31"  class="w-full" v-bind:disabled="!(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" />
                     <span v-else>{{ date }}</span>
                 </div>
                 <div class="grid grid-cols-2 gap-1" style="padding-bottom:1vh;">
@@ -49,15 +49,16 @@
                     <input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="acabado" type="text" class="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" placeholder="Tapa Rústica"/>
                     <span v-else>{{ acabado }}</span>
                 </div>
+                <FormTopics ref="topic_ref" v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))"></FormTopics>
             </div>
 
-            <div class="">
+            <div class="m-2">
                 <h2>Portada</h2>
                 <input v-if="this.user && this.user.auth_helper.includes('CRUD_BOOKS')" type="file" id="seleccionArchivos" accept="image/*" @change="subir_img">
                 <img id="imagenPrevisualizacion" style="padding-top:2vh; padding-bottom:2vh;">
             </div>
 
-            <div class="">
+            <div class="m-2">
                 <div class="grid grid-cols-2" style="padding-bottom:1vh;">
                     <label>Nombre</label><input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="nombre" class ="w-full" type="text" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" placeholder="El caso de Alaska Sanders"/>
                     <span v-else>{{ acabado }}</span>
@@ -81,9 +82,9 @@
             </div>
         </div>
         <div class="justify-center text-center items-center content-center">
-            <button v-if="!$route.params.id"
+            <button v-if="$route.params.id"
                 class="font-bold py-3 px-4 border-b-4 hover:border-b-4 border-gray-500 hover:border-black rounded-full"
-                style="background-color: #14b8a6; color:black;" @click="crear">Actualizar</button>
+                style="background-color: #14b8a6; color:black;">Actualizar</button>
             <button v-else class="font-bold py-2 px-4 border-b-4 hover:border-b-4 border-gray-500 hover:border-black rounded-full"
                 style="background-color: #14b8a6; color:black;" @click="crear">Crear</button>
         </div>
@@ -92,7 +93,11 @@
 
 <script>
 import snackBar from "@/components/snackBar.vue";
+import FormTopics from "@/components/formTopics.vue";
 export default {
+    components: {
+        FormTopics
+    },
     data() {
         return {
             "sinopsis": "",
@@ -198,6 +203,7 @@ export default {
                 body: JSON.stringify(data),
                 credentials: 'include'
             };
+            console.log("hola")
             if (this.$route.params.id){
                 let response = await fetch("http://localhost:5000/book/update", requestOptions)
                 if (response.status === 200 || response.status === 201) {
@@ -212,6 +218,7 @@ export default {
                     snackBar.showSnackBar("No se pudo crear el libro, intenta nuevamente");
                 }
             }else{
+                console.log("llegue al else")
                 let response = await fetch("http://localhost:5000/book/create", requestOptions)
                 if (response.status === 200 || response.status === 201) {
                     await response.json();
