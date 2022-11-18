@@ -1,6 +1,16 @@
 <template>
   <div class="home">
     <div class="bg-white">
+      <div style="background-color: #14b8a6;">
+        <div class="flex flex-wrap justify-center " style="width: 100%; height: 30vh;">
+          <img
+          style="width: 25vh;"
+          src="../assets/logo.png"
+          class="p-1 rounded"
+          alt="..."/>
+        </div>
+      </div>
+
       <div class="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
         <div class="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
           <div v-for="libro in books" v-bind:key="libro.id" class="group relative">
@@ -49,6 +59,12 @@ export default
 };
 </script>
 <style>
+
+.grid {
+    display: grid;
+    align-content: center;
+    justify-content: start;
+}
 
 #regLogo
 {
@@ -106,5 +122,11 @@ h1
     padding-left: 0.75rem;
     font-size: 1rem;
     line-height: 1.5rem;
+}
+img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  width: 80%;
 }
 </style>
