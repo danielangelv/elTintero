@@ -1,88 +1,152 @@
 <template>
     <div class="bg-gray-100 mx-auto max-w-6xl bg-white py-5 px-5 lg:px-10 shadow-xl mb-10 bg-white">
         <h1>Crear Libro</h1>
-        <div class="grid grid-cols-3 gap-4">
-            <div>
-                <h3>Sinopsis</h3>
-                <textarea  v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="sinopsis" class="w-full"></textarea>
+
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+            <div class="m-2">
+                <h2>Sinopsis</h2>
+                <textarea v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="sinopsis"
+                    class="w-full"></textarea>
                 <span v-else>{{ sinopsis }}</span>
                 <h3 class="my-2">caracteristicas</h3>
                 <div class="grid grid-cols-2 gap-1">
                     <label for="">Año de edicion</label>
-                    <input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="date" type="date" class="w-full" v-bind:disabled="!(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" />
+                    <input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="date" type="date"
+                        max="2022/12/31" class="w-full"
+                        v-bind:disabled="!(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" />
                     <span v-else>{{ date }}</span>
                 </div>
                 <div class="grid grid-cols-2 gap-1">
                     <label for="">Tipo</label>
-                    <input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="type" type="text" class="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))"/>
+                    <input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="type" type="text"
+                        class="w-full" v-bind:disabled="!(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))"
+                        placeholder="Libro" />
                     <span v-else>{{ type }}</span>
                 </div>
                 <div class="grid grid-cols-2 gap-1">
                     <label for="">ISXN</label>
-                    <input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="isxn" type="text" class="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))"/>
+                    <input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="isxn" type="text"
+                        class="w-full" v-bind:disabled="!(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))"
+                        placeholder="9786287525573" />
                     <span v-else>{{ isxn }}</span>
                 </div>
                 <div class="grid grid-cols-2 gap-1">
                     <label for="">Idioma</label>
-                    <input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="language" type="text" class="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))"/>
+                    <input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="language"
+                        type="text" class="w-full"
+                        v-bind:disabled="!(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))"
+                        placeholder="Español" />
                     <span v-else>{{ language }}</span>
                 </div>
                 <div class="grid grid-cols-2 gap-1">
                     <label for="">Num Paginas</label>
-                    <input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="num_pag" type="number" min="1" class="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" />
-                    <span v-else>{{ num-pag }}</span>
+                    <input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="num_pag"
+                        type="number" min="1" class="w-full"
+                        v-bind:disabled="!(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))"
+                        placeholder="592" />
+                    <span v-else>{{ num - pag }}</span>
                 </div>
-                <div class="grid grid-cols-2 gap-1"><label for="">Peso</label><input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="weight" type="number" class="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" /><span v-else>{{ weight }}</span>
+                <div class="grid grid-cols-2 gap-1" style="padding-bottom:1vh;">
+                    <label for="">Peso</label>
+                    <input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="weight"
+                        type="number" class="w-full"
+                        v-bind:disabled="!(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))"
+                        placeholder="610" />
+                    <span v-else>{{ weight }}</span>
                 </div>
                 <div class="grid grid-cols-2 gap-1">
                     <label for="">Tamaño</label>
-                    <input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="size" type="text" class="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" />
+                    <input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="size" type="text"
+                        class="w-full" v-bind:disabled="!(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))"
+                        placeholder="15 x 24 cm" />
                     <span v-else>{{ size }}</span>
                 </div>
                 <div class="grid grid-cols-2 gap-1">
                     <label for="">Acabado</label>
-                    <input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="acabado" type="text" class="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" />
+                    <input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="acabado"
+                        type="text" class="w-full"
+                        v-bind:disabled="!(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))"
+                        placeholder="Tapa Rústica" />
                     <span v-else>{{ acabado }}</span>
                 </div>
-                <FormTopics  ref="topic_ref" v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))"></FormTopics>
+                <FormTopics ref="topic_ref" v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))">
+                </FormTopics>
             </div>
-            <div>
-                <h3>portada</h3>
-                <input v-if="this.user && this.user.auth_helper.includes('CRUD_BOOKS')" type="file" id="seleccionArchivos" accept="image/*" @change="subir_img">
-                <img id="imagenPrevisualizacion">
+
+            <div class="m-2">
+                <h2>Portada</h2>
+                <input v-if="this.user && this.user.auth_helper.includes('CRUD_BOOKS')" type="file"
+                    id="seleccionArchivos" accept="image/*" @change="subir_img">
+                <img id="imagenPrevisualizacion" style="padding-top:2vh; padding-bottom:2vh;">
             </div>
-            <div>
-                <div class="grid grid-cols-2">
-                    <label>Nombre</label><input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="nombre" class ="w-full" type="text" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" /><span v-else>{{ acabado }}</span>
+
+            <div class="m-2">
+                <div class="grid grid-cols-2" style="padding-bottom:1vh;">
+                    <label>Nombre</label><input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))"
+                        v-model="nombre" class="w-full" type="text"
+                        v-bind:disabled="!(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))"
+                        placeholder="El caso de Alaska Sanders" />
+                    <span v-else>{{ acabado }}</span>
                 </div>
-                <div class="grid grid-cols-2">
-                    <label>Autor</label><input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="autor" type="text" class ="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" /><span v-else>{{ acabado }}</span>
+                <div class="grid grid-cols-2" style="padding-bottom:1vh;">
+                    <label>Autor</label><input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))"
+                        v-model="autor" type="text" class="w-full"
+                        v-bind:disabled="!(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))"
+                        placeholder="Joël Dicker" />
+                    <span v-else>{{ acabado }}</span>
                 </div>
-                <div class="grid grid-cols-2">
-                    <label>Editorial</label><input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="editorial" type="text" class ="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" /><span v-else>{{ acabado }}</span>
+                <div class="grid grid-cols-2" style="padding-bottom:1vh;">
+                    <label>Editorial</label><input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))"
+                        v-model="editorial" type="text" class="w-full"
+                        v-bind:disabled="!(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))"
+                        placeholder="Penguin Random House" />
+                    <span v-else>{{ acabado }}</span>
                 </div>
-                <div class="grid grid-cols-2">
-                    <label>Precio en pesos</label><input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="price" type="text" class ="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" /><span v-else>{{ acabado }}</span>
+                <div class="grid grid-cols-2" style="padding-bottom:1vh;">
+                    <label>Precio en pesos</label><input
+                        v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="price" type="text"
+                        class="w-full" v-bind:disabled="!(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))"
+                        placeholder="79.000" />
+                    <span v-else>{{ acabado }}</span>
                 </div>
-                <div class="grid grid-cols-4">
-                    <label>Ingrese la cantidad de libros disponibles:</label>
-                    <button  v-if=" (this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" @click="sum">+</button>
-                    <input v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="number" type="number" min="1" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" ><span v-else>{{ acabado }}</span>
-                    <button v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" @click="minus">-</button>
+                <div class="grid grid-cols-2" style="padding-bottom:1vh;">
+                    <label>Ingrese la cantidad de libros disponibles:</label><input
+                        v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="number"
+                        type="number" min="1" class="w-full"
+                        v-bind:disabled="!(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))"
+                        placeholder="5" />
+                    <span v-else>{{ acabado }}</span>
+                </div>
+                <div class="justify-center text-center items-center content-center space-y-4 space-x-4">
+                    <button v-if="(this.user && this.user.auth_helper.includes('BUY_BOOK'))"
+                        class="font-bold py-2 px-4 border-b-4 hover:border-b-4 border-gray-500 hover:border-black rounded-full"
+                        style="background-color: #14b8a6; color:black;" @click="crear">Comprar</button>
+
+                    <button v-if="(this.user && this.user.auth_helper.includes('BUY_BOOK'))"
+                        class="font-bold py-2 px-4 border-b-4 hover:border-b-4 border-gray-500 hover:border-black rounded-full"
+                        style="background-color: #14b8a6; color:black;" @click="crear">Reservar</button>
+                </div>
+                <div class="justify-center text-center items-center content-center space-y-4 space-x-4">
+                    <input v-if="!user" class="font-bold py-2 px-4 border-b-4 hover:border-b-4 border-gray-500 hover:border-black rounded-full m-5 comprar" 
+                    style="background-color: #14b8a6; color:black" type="button" onclick="alert('Por favor inicia sesión o registrate para comprar')" value="Comprar">
+                    <input v-if="!user" class="font-bold py-2 px-4 border-b-4 hover:border-b-4 border-gray-500 hover:border-black rounded-full m-5 comprar" 
+                    style="background-color: #14b8a6; color:black" type="button" onclick="alert('Por favor inicia sesión o registrate para reservar el libro')" value="Reservar">
                 </div>
             </div>
         </div>
-        <div class="text-center items-center content-center">
-            <button v-if="!$route.params.id"
+        <div class="justify-center text-center items-center content-center">
+            <button v-if="$route.params.id "
+                class="font-bold py-3 px-4 border-b-4 hover:border-b-4 border-gray-500 hover:border-black rounded-full"
+                style="background-color: #14b8a6; color:black;">Actualizar</button>
+            <button v-else
                 class="font-bold py-2 px-4 border-b-4 hover:border-b-4 border-gray-500 hover:border-black rounded-full"
-                style="background-color: #14b8a6; color:black;" @click="crear">Actualizar</button>
-            <button v-else class="font-bold py-2 px-4 border-b-4 hover:border-b-4 border-gray-500 hover:border-black rounded-full"
                 style="background-color: #14b8a6; color:black;" @click="crear">Crear</button>
         </div>
     </div>
 </template>
 
 <script>
+
 import snackBar from "@/components/snackBar.vue";
 import FormTopics from "@/components/formTopics.vue";
 export default {
@@ -103,14 +167,14 @@ export default {
             "acabado": "",
             "number": 0,
             "price": "",
-            "weight":"",
-            "id":"",
+            "weight": "",
+            "id": "",
             "user": JSON.parse(localStorage.getItem('userInFormation'))
         };
     },
     async created() {
         this.$route.params.id
-        if (this.$route.params.id){
+        if (this.$route.params.id) {
             let response = await fetch(`http://localhost:5000/book/${this.$route.params.id}`)
             if (response.status === 200 || response.status === 201) {
                 const answer = await response.json();
@@ -129,6 +193,7 @@ export default {
                 console.log(answer)
                 const imagenPrevisualizacion = document.querySelector("#imagenPrevisualizacion");
                 imagenPrevisualizacion.src = answer.book.img
+                
             }
             else {
                 //alert("No se pudo crear el libro intente nuevamente")
@@ -138,6 +203,8 @@ export default {
         }
     },
     methods: {
+        
+        
         subir_img: function (e) {
             console.log(e);
             const seleccionArchivos = document.querySelector("#seleccionArchivos");
@@ -159,7 +226,7 @@ export default {
             console.log(e)
             this.number = this.number - 1
         },
-        read_file: async function() {
+        read_file: async function () {
             return new Promise((resolve, reject) => {
                 const seleccionArchivos = document.querySelector("#seleccionArchivos");
                 const reader = new FileReader();
@@ -173,19 +240,19 @@ export default {
             let data = {
                 "sinopsis": this.sinopsis,
                 "isxn": this.isxn,
-                "autor":this.autor,
-                "name":this.nombre,
-                "editorial":this.editorial,
-                "date":this.date,
-                "language":this.language,
-                "num_pag":this.num_pag,
-                "size":this.size,
-                "acabado":this.acabado,
-                "number":this.number,
-                "price":this.price,
+                "autor": this.autor,
+                "name": this.nombre,
+                "editorial": this.editorial,
+                "date": this.date,
+                "language": this.language,
+                "num_pag": this.num_pag,
+                "size": this.size,
+                "acabado": this.acabado,
+                "number": this.number,
+                "price": this.price,
                 "topics": this.$refs.topic_ref.choseen_topics,
-                "image":await this.read_file(),
-                "weigh":this.weight
+                "image": await this.read_file(),
+                "weigh": this.weight
             }
             const requestOptions = {
                 method: "POST",
@@ -195,20 +262,20 @@ export default {
                 credentials: 'include'
             };
             console.log("hola")
-            if (this.$route.params.id){
+            if (this.$route.params.id) {
                 let response = await fetch("http://localhost:5000/book/update", requestOptions)
                 if (response.status === 200 || response.status === 201) {
                     await response.json();
                     snackBar.showSnackBar("Libro actualizado existosamente");
                     setTimeout(function () {
-                      window.location = '/';
+                        window.location = '/';
                     }, 1000);
                 }
                 else {
                     //alert("No se pudo crear el libro intente nuevamente")
                     snackBar.showSnackBar("No se pudo crear el libro, intenta nuevamente");
                 }
-            }else{
+            } else {
                 console.log("llegue al else")
                 let response = await fetch("http://localhost:5000/book/create", requestOptions)
                 if (response.status === 200 || response.status === 201) {
@@ -216,11 +283,11 @@ export default {
                     //alert('libro creado existosamente');
                     snackBar.showSnackBar("libro creado existosamente");
                     setTimeout(function () {
-                      window.location = '/';
+                        window.location = '/';
                     }, 1000);
                 }
                 else {
-                  snackBar.showSnackBar("No se pudo crear el libro");
+                    snackBar.showSnackBar("No se pudo crear el libro");
                 }
             }
 
@@ -231,23 +298,22 @@ export default {
 </script>
 
 <style>
-h2
-{
+h2 {
     font-size: 2rem;
     color: black;
     font-family: 'Abhaya Libre', serif;
 }
+
 #boxCrearLibro {
     color: black;
     background-color: white;
 }
 
-label
-{
+label {
     font-family: 'Roboto Mono', monospace;
 }
 
-[type='file']{
+[type='file'] {
 
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -264,6 +330,5 @@ label
     line-height: 1.5rem;
 
 }
-    
 
 </style>
