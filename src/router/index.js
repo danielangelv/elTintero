@@ -95,6 +95,15 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/historialCompras.vue"),
   },
   {
+    path: "/CrearTienda",
+    name: "CrearTienda",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/CrearTienda.vue"),
+  },
+  {
     path: "/CarritoCompras",
     name: "CarritoCompras",
     // route level code-splitting
@@ -103,6 +112,7 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/CarritoCompras.vue"),
   },
+  
 ];
 
 const router = createRouter({

@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-gray-100 mx-auto max-w-6xl bg-white py-5 px-5 lg:px-10 shadow-xl mb-10 bg-white">
+    <div class="bg-gray-100 mx-auto max-w-6xl bg-white py-5 px-5 shadow-xl mb-10 bg-white">
         <h1>Crear Tienda</h1>
 
         <div class="grid grid-cols-1 gap-4 ">
@@ -34,14 +34,7 @@
             <button v-if="(this.user && this.user.auth_helper.includes('CREATE_STORE'))" class="font-bold py-2 px-4 border-b-4 hover:border-b-4 border-gray-500 hover:border-black rounded-full"
                 style="background-color: #14b8a6; color:black;" @click="crear">Crear</button>
         </div>
-        <div class="grid grid-cols-1 border border-teal-500 ">
-            <div v-for="tienda in tiendas" v-bind:key="tienda.nombre" >
-                <div class="lg:w-5/6 w-full lg:pr-3 mx-4 my-4 bg-gray-200 rounded-xl p-6">
-                    <span>{{ tienda.nombre }}</span>
-                    <button class="font-bold py-2 px-4 border-b-4 hover:border-b-4 border-gray-500 hover:border-black rounded-full" style="background-color: #14b8a6; color:black;">Eliminar</button>
-                </div>
-            </div>
-        </div>
+        
     </div>
     
 </template>
@@ -52,7 +45,6 @@ export default {
         {},
     data() {
         return {
-            "tiendas":[{"nombre":"tienda 1","direccion": "carrera2","horario": "lunes-marte"},{"nombre":"tienda 2","direccion": "carrera2","horario": "lunes-marte"},{"nombre":"tienda 3","direccion": "carrera2","horario": "lunes-marte"},{"nombre":"tienda 4","direccion": "carrera2","horario": "lunes-marte"}],
             "lugar": "",
             "direccion": "",
             "contacto": "",

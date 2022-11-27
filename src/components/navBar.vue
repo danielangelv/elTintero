@@ -40,7 +40,7 @@
             </div>
 
             <button v-if="user"
-              class="flex-grow md:w-full font-bold py-2 px-4 border-b-4 hover:border-b-4 border-gray-500 hover:border-black rounded-full"
+              class="flex-grow font-bold py-2 px-4 border-b-4 hover:border-b-4 border-gray-500 hover:border-black rounded-full"
               style="background-color: #14b8a6; color:black; margin-top: 5px;" @click="logout">
               Cerrar sesion
             </button>
@@ -51,29 +51,15 @@
     </div>
 
     <router-link to="/" class="flex items-center">
-      <img src="../assets/icono.png" class="h-10 mr-3 sm:h-9" alt="Flowbite Logo" />
+      <img src="../assets/icono.png" class="h-10 mr-3 " alt="Flowbite Logo" />
       <span class="self-center text-sm font-semibold whitespace-nowrap text-gray-100">El Tintero</span>
     </router-link>
-    <router-link v-if="!user"
-      class="block py-2 pl-3 pr-4 text-gray-100 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-500 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-      style="padding-left: 10vw" to="/login">Iniciar Sesion</router-link>
-    <router-link v-if="!user"
-      class="block py-2 pl-3 pr-4 text-gray-100 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-500 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-      style="padding-left: 10vw" to="/register">Registro</router-link>
-    <router-link v-if="user && user.auth_helper.includes('CRUD_BOOKS')"
-      class="block py-2 pl-3 pr-4 text-gray-100 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-500 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-      to="/createBook">Crear libro</router-link>
-    <router-link v-if="user && user.auth_helper.includes('CREATE_ADMIN_USER')"
-      class="block py-2 pl-3 pr-4 text-gray-100 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-500 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-      to="/createAdmi">Crear Administrador</router-link>
-    <router-link v-if="user"
-      class="block py-2 pl-3 pr-4 text-gray-100 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-500 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-      style="padding-left: 10vw" to="/CarritoCompras">
-      
-      <i class="fa-solid fa-cart-shopping fa-2x"></i>
-      
-    </router-link>
-
+    <router-link v-if="!user" class="block py-2 pl-3 pr-4 text-gray-100 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:border-gray-700" style="padding-left: 10vw" to="/login">Iniciar Sesion</router-link>
+    <router-link v-if="!user" class="block py-2 pl-3 pr-4 text-gray-100 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:border-gray-700" style="padding-left: 10vw" to="/register">Registro</router-link>
+    <router-link v-if="user && user.auth_helper.includes('CRUD_BOOKS')" class="block py-2 pl-3 pr-4 text-gray-100 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:border-gray-700" to="/createBook">Crear libro</router-link>
+    <router-link v-if="user && user.auth_helper.includes('CREATE_ADMIN_USER')" class="block py-2 pl-3 pr-4 text-gray-100 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:border-gray-700" to="/createAdmi">Crear Administrador</router-link>
+    <router-link v-if="user" class="block py-2 pl-3 pr-4 text-gray-100 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:border-gray-700" style="padding-left: 10vw" to="/CarritoCompras"> <i class="fa-solid fa-cart-shopping fa-2x"></i></router-link>
+    <router-link  v-if="user && user.auth_helper.includes('CREATE_STORE')" class="block py-2 pl-3 pr-4 text-gray-100 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:border-gray-700" to="/CrearTienda">Crear Tienda</router-link>
   </nav>
 </template>
 

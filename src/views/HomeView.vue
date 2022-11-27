@@ -3,12 +3,12 @@
     <div class="grid grid-rows-1 bg-gradient-to-r from-teal-300 to-teal-500 h-48 w-full">
       <div class="grid grid-rows-3">
         <div
-          class="font-serif text-2xl md:text-5xl font-bold text-gray-800 underline underline-offset-8 place-self-center">
+          class="font-serif text-2xl font-bold text-gray-800 underline underline-offset-8 place-self-center">
           EL TINTERO</div>
-        <div class="font-serif text-sm md:text-lg text-gray-800 mx-auto">¡Que leer sea como empezar una nueva aventura!
+        <div class="font-serif text-sm text-gray-800 mx-auto">¡Que leer sea como empezar una nueva aventura!
         </div>
         <div class="flex justify-center">
-          <div class="mb-3 xl:w-96">
+          <div class="mb-3">
             <div class="input-group relative flex flex-wrap items-stretch w-full mb-4">
               <input type="search"
                 class="form-control relative flex-auto min-w-0 block w-80 px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-teal-500 focus:outline-none"
@@ -29,15 +29,31 @@
       </div>
     </div>
 
-    <div class="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
-      <div class="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+    <div class="grid grid-cols-3 gap-3">
+      <div class="grid grid-rows-1 mt-6 gap-y-10 gap-x-6">
+        <div v-for="tienda in tiendas" v-bind:key="tienda.nombre" class="block max-w-sm p-6 bg-white border border-teal-500 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 ">
+          <div class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+            <span>{{ tienda.nombre }}</span>
+          </div>
+          <div class="font-normal text-gray-700 dark:text-gray-400">
+            <span>{{ tienda.contacto }}</span>
+          </div>
+          <div class="font-normal text-gray-700 dark:text-gray-400">
+            <span>{{ tienda.horario }}</span>
+          </div>
+          <div class="font-normal text-gray-700 dark:text-gray-400">
+            <span>{{ tienda.direccion }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="mr-10 col-span-2 mt-6 gap-y-10 gap-x-6 grid grid-cols-3">
         <div v-for="libro in books" v-bind:key="libro.id"
-          class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+          class="max-w-sm bg-white border border-teal-500 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 scroll-mr-5">
           <div
-            class="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
+            class="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75">
             <router-link class="basis-1/4 box-content h-5 text-black" v-bind:to="`/Book/${libro.id}`">
               <img v-bind:src="libro.img" alt="Front of men&#039;s Basic Tee in black."
-                class="h-full w-full object-cover object-center lg:h-full lg:w-full">
+                class="h-full w-full object-cover object-center">
             </router-link>
           </div>
           <div class="bg-gradient-to-r from-cyan-500 to-blue-500 decoration-double"></div>
@@ -60,13 +76,7 @@
           </div>
         </div>
       </div>
-      <div class="grid grid-cols-1 border border-teal-500 ">
-        <div v-for="tienda in tiendas" v-bind:key="tienda.nombre">
-          <div class="lg:w-5/6 w-full lg:pr-3 mx-4 my-4 bg-gray-200 rounded-xl p-6">
-            <span>{{ tienda.nombre }}</span>
-          </div>
-        </div>
-      </div>
+      
 
     </div>
 
@@ -121,3 +131,4 @@ h1 {
   font-size: 4rem;
   color: black;
 }
+</style>
