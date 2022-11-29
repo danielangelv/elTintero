@@ -84,10 +84,18 @@ export default {
           console.log(answer)
           localStorage.setItem('userInFormation', JSON.stringify(answer.data));
           //alert('¡Inicio de Sesión Exitoso!');
-          snackBar.showSnackBar("¡Bienvenido nuevamente!")
-          setTimeout(function () {
+          snackBar.showSnackBar("¡Bienvenido nuevamente!");
+          if(answer.data.name == 'usuario_root'){
+            setTimeout(function () {
+            window.location = '/createAdmi';
+          }, 1000);
+          }
+          else{
+            setTimeout(function () {
             window.location = '/';
           }, 1000);
+          }
+
         }else{
           //return alert('¡Usuario o Contraseña incorrecto!');
           snackBar.showSnackBar("¡Datos incorrectos!")

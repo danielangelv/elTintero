@@ -30,7 +30,7 @@
     </div>
 
     <div class="grid grid-cols-3 gap-3">
-      <div class="grid grid-rows-1 mt-6 gap-y-10 gap-x-6">
+      <div class="grid grid-cols-1 mt-6 gap-y-10 gap-x-6">
         <div v-for="tienda in tiendas" v-bind:key="tienda.nombre" class="block max-w-sm p-6 bg-white border border-teal-500 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 ">
           <div class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
             <span>{{ tienda.nombre }}</span>
@@ -50,7 +50,7 @@
         <div v-for="libro in books" v-bind:key="libro.id"
           class="max-w-sm bg-white border border-teal-500 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 scroll-mr-5">
           <div
-            class="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75">
+            class="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
             <router-link class="basis-1/4 box-content h-5 text-black" v-bind:to="`/Book/${libro.id}`">
               <img v-bind:src="libro.img" alt="Front of men&#039;s Basic Tee in black."
                 class="h-full w-full object-cover object-center">

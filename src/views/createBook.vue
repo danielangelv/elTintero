@@ -109,7 +109,7 @@
                         placeholder="79.000" />
                     <span v-else>{{ acabado }}</span>
                 </div>
-                <div class="grid grid-cols-2" style="padding-bottom:1vh;">
+                <div class="grid grid-cols-2" style="padding-bottom:1vh" v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))">
                     <label>Ingrese la cantidad de libros disponibles:</label><input
                         v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))" v-model="number"
                         type="number" min="1" class="w-full"
@@ -117,14 +117,26 @@
                         placeholder="5" />
                     <span v-else>{{ acabado }}</span>
                 </div>
+                <div class="grid grid-cols-2" style="padding-bottom:1vh;" v-if="(this.user && this.user.auth_helper.includes('BUY_BOOK'))">
+                    <label>Ingrese unidades a comprar:</label><input
+                        v-if="(this.user && this.user.auth_helper.includes('BUY_BOOK'))" v-model="number"
+                        type="number" min="1" class="w-full"
+                        v-bind:disabled="!(this.user && this.user.auth_helper.includes('BUY_BOOK'))"
+                        placeholder="5" />
+                    <span v-else>{{ acabado }}</span>
+                </div>
                 <div class="justify-center text-center items-center content-center space-y-4 space-x-4">
                     <button v-if="(this.user && this.user.auth_helper.includes('BUY_BOOK'))"
                         class="font-bold py-2 px-4 border-b-4 hover:border-b-4 border-gray-500 hover:border-black rounded-full"
-                        style="background-color: #14b8a6; color:black;" @click="crear">Comprar</button>
+                        style="background-color: #14b8a6; color:black;" @click="comprar">Comprar</button>
 
                     <button v-if="(this.user && this.user.auth_helper.includes('BUY_BOOK'))"
                         class="font-bold py-2 px-4 border-b-4 hover:border-b-4 border-gray-500 hover:border-black rounded-full"
                         style="background-color: #14b8a6; color:black;" @click="crear">Reservar</button>
+
+                    <button v-if="(this.user && this.user.auth_helper.includes('CRUD_BOOKS'))"
+                        class="font-bold py-2 px-4 border-b-4 hover:border-b-4 border-gray-500 hover:border-black rounded-full"
+                        style="background-color: #ff2d00; color:black;" @click="crear">Eliminar</button>
                 </div>
                 <div class="justify-center text-center items-center content-center space-y-4 space-x-4">
                     <input v-if="!user" class="font-bold py-2 px-4 border-b-4 hover:border-b-4 border-gray-500 hover:border-black rounded-full m-5 comprar" 
@@ -290,8 +302,23 @@ export default {
                     snackBar.showSnackBar("No se pudo crear el libro");
                 }
             }
-
-        }
+        },
+        comprar: function(e){
+            if(e){
+                e.preventDefault();
+            }
+            var carrito = JSON.parse(localStorage.getItem("carrito"));
+            if(!carrito){
+                carrito = [];
+            }
+            var newItem = { "producto": this.name, "valor_unitario": this.price, "unidades": this.number, "valor_total": (this.price * this.number),"total_pago":this.price};
+            carrito.push(newItem);
+            localStorage.setItem("carrito",JSON.stringify(carrito));
+            snackBar.showSnackBar("libro añadido al carrito de compras existosamente");
+            setTimeout(function () {
+                        window.location = '/CarritoCompras';
+                    }, 1000);
+            }
     }
 }
 
