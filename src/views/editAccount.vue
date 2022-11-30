@@ -105,17 +105,17 @@
       </div>
     </div>
   </template>
-  
-  
+
+
   <script>
   import FormTopics from "@/components/formTopics.vue";
   import AutoComplete from "@/components/AutoComplete.vue";
   import snackBar from "@/components/snackBar.vue";
   import DANE from "@/assets/dane.json";
-  
+
   //console.log(DANE);
   var ciudades = DANE.map((e) => e.name+", "+e.department.name);
-  
+
   export default {
     components: {
       FormTopics
@@ -173,7 +173,7 @@
         if (!this.identification || this.identification == "") {
           return snackBar.showSnackBar("¡Ingresa una identificación válida!");
         }
-  
+
         this.password = window.btoa(this.password);
         const payload = {
           "name": this.name,
@@ -193,8 +193,8 @@
           body: JSON.stringify(payload),
           credentials: 'include'
         };
-  
-        let data = await fetch("http://localhost:5000/register", requestOptions)
+
+        let data = await fetch("https://api.eltintero.co/register", requestOptions)
         if (data.status === 200 || data.status === 201){
           const answer = await data.json();
           localStorage.setItem('userInFormation', JSON.stringify(answer.data));
@@ -208,15 +208,15 @@
     }
   }
   </script>
-  
+
   <style>
   .domain_checkbox {
     border-right: 1px solid rgb(20 184 166);
   }
-  
-  
+
+
   .view-container {
     background-color: rgb(20 184 166)
   }
-  
+
   </style>

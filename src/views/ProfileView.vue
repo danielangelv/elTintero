@@ -5,20 +5,21 @@
 
                 <div class="offcanvas-body flex-grow p-4"
                     style="text-align: center; margin-bottom: 2rem; background-color: #def2f1; border: 2px solid rgb(20 184 166);">
-
+                    <h2>  <span style="color:goldenrod;">SALDO: </span> {{user.saldo ? moneda.format(user.saldo) : '$ 0'}}</h2>
                     <div style="margin-bottom: 2rem; border: 2px solid rgb(20 184 166);">
                         <div class="flex items-center justify-center p-4">
                             <i class="fa-solid fa-user sm:fa-10x fa-6x justify-center py-2"
                                 id="offcanvasExampleLabel"></i>
                         </div>
 
-                        <div>
-                            Pepito perez
-                        </div>
-
                         <div v-if="user" class="offcanvas-body flex-grow p-4">{{ user.name }}</div>
                     </div>
 
+                    <div class="flex-grow w-full font-bold py-2 px-4 border-b-4 hover:border-b-4 border-gray-500 hover:border-black rounded-full"
+                        style="background-color: #14b8a6; color:black; margin-top: 5px;">
+                        <router-link v-if="user" to="/RecargarSaldo">Recargar Saldo
+                        </router-link>
+                    </div>
                     <div class="flex-grow w-full md:bg-black font-bold py-2 px-4 border-b-4 hover:border-b-4 border-gray-500 hover:border-black rounded-full"
                         style="background-color: #14b8a6; color:black; margin-top: 5px;">
                         <router-link v-if="user" to="/historialCompras">Ver Historial
@@ -97,6 +98,7 @@
 
 <script>
 import snackBar from "@/components/snackBar.vue";
+const moneda = new Intl.NumberFormat('es-CO',{style:'currency',currency:'COP',minimumFractionDigits:0});
 export default {
     name: "navBar",
     components:
@@ -110,7 +112,7 @@ export default {
                 mode: "cors",
                 credentials: 'include'
             };
-            var data = await fetch("http://localhost:5000/loggout", request)
+            var data = await fetch("https://api.eltintero.co/loggout", request)
 
             if (data.status === 200) {
                 data = await data.json();
@@ -129,6 +131,7 @@ export default {
     data() {
         return {
             "user": JSON.parse(localStorage.getItem('userInFormation')),
+            "moneda":moneda,
             "tiendas": [{ "nombre": "tienda 1", "lugar": "lugar 1", "direccion": "carrera2", "contacto": "1234", "horario": "lunes-marte" },
             { "nombre": "tienda 2", "lugar": "lugar 2", "direccion": "carrera2", "contacto": "1234", "horario": "lunes-marte" },
             { "nombre": "tienda 3", "lugar": "lugar 3", "direccion": "carrera2", "contacto": "1234", "horario": "lunes-marte" },

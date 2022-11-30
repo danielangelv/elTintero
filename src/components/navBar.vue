@@ -20,7 +20,7 @@
               data-bs-dismiss="offcanvas" aria-label="Close">X</button>
           </div>
           <div class="offcanvas-body flex-grow p-4" style="text-align: center;">
-            
+
             <div v-if="user" class="offcanvas-body flex-grow p-4">{{ user.name }}</div>
 
             <div
@@ -83,7 +83,7 @@ export default {
         mode: "cors",
         credentials: 'include'
       };
-      var data = await fetch("http://localhost:5000/loggout", request)
+      var data = await fetch("https://api.eltintero.co/loggout", request)
 
       if (data.status === 200) {
         data = await data.json();

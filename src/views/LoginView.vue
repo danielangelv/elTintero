@@ -35,11 +35,11 @@
                 </button>
               </div>
               <div class="flex flex-wrap mt-6 relative">
-                
+
                 <RouterLink to="/recuperarContraseña" class="text-black w-1/2">
                   <small>¿Olvidó su clave?</small>
                 </RouterLink>
-                
+
                 <router-link to="/register" class="text-black w-1/2 text-right">
                   <small>Crear una cuenta</small>
                 </router-link>
@@ -77,7 +77,7 @@ export default {
         credentials: 'include'
       };
       try {
-        const data = await fetch("http://localhost:5000/login", requestOptions);
+        const data = await fetch("https://api.eltintero.co/login", requestOptions);
         console.log(data)
         if (data.status === 200) {
           const answer = await data.json();

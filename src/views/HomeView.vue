@@ -43,7 +43,8 @@
           </div>
           <div class="font-normal text-gray-700 dark:text-gray-400">
             <span>{{ tienda.direccion }}</span>
-          </div>
+          </div><br/>
+          <iframe v-bind:src="`https://maps.google.com/maps?width=300&height=250&q=${tienda.direccion}&ie=UTF8&outpud=embed&iwloc=B`" width="300" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
       </div>
       <div class="mr-10 col-span-2 mt-6 gap-y-10 gap-x-6 grid grid-cols-3">
@@ -76,7 +77,7 @@
           </div>
         </div>
       </div>
-      
+
 
     </div>
 
@@ -107,7 +108,7 @@ export default
       }
     },
     async created() {
-      let response = await fetch('http://localhost:5000/book')
+      let response = await fetch('https://api.eltintero.co/book')
       if (response.status === 200 || response.status === 201) {
         const answer = await response.json();
         this.books = answer.books

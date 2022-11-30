@@ -194,7 +194,7 @@ export default {
         credentials: 'include'
       };
 
-      let data = await fetch("http://localhost:5000/register", requestOptions)
+      let data = await fetch("https://api.eltintero.co/register", requestOptions)
       if (data.status === 200 || data.status === 201){
         const answer = await data.json();
         localStorage.setItem('userInFormation', JSON.stringify(answer.data));

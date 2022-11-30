@@ -86,6 +86,24 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/ProfileView.vue"),
   },
   {
+    path: "/RecargarSaldo",
+    name: "RecargarSaldo",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/RecargarSaldo.vue"),
+  },
+  {
+    path: "/NuevaTarjeta",
+    name: "NuevaTarjeta",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/NuevaTarjeta.vue"),
+  },
+  {
     path: "/historialCompras",
     name: "historialCompras",
     // route level code-splitting
@@ -112,7 +130,7 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/CarritoCompras.vue"),
   },
-  
+
 ];
 
 const router = createRouter({

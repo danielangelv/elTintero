@@ -15,33 +15,33 @@
                     <input v-if="(this.user && this.user.auth_helper.includes('CREATE_STORE'))" v-model="direccion" type="text" class="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CREATE_STORE'))" placeholder="Español"/>
                     <span v-else>{{ direccion }}</span>
                 </div>
-                
+
                 <div class="place-self-center grid grid-cols-1 px-5 w-80" style="padding-bottom:1vh;">
                     <label for="">CONTACTO:</label>
                     <input v-if="(this.user && this.user.auth_helper.includes('CREATE_STORE'))" v-model="contacto" type="text" class="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CREATE_STORE'))" placeholder="Español"/>
                     <span v-else>{{ contacto }}</span>
                 </div>
-                
+
                 <div class="place-self-center grid grid-cols-1 px-5 w-80" style="padding-bottom:1vh;">
                     <label for="">HORARIO HABITUAL:</label>
                     <input v-if="(this.user && this.user.auth_helper.includes('CREATE_STORE'))" v-model="horario" type="text" class="w-full" v-bind:disabled=" !(this.user && this.user.auth_helper.includes('CREATE_STORE'))" placeholder="Español"/>
                     <span v-else>{{ horario }}</span>
                 </div>
-                
+
             </div>
         </div>
         <div class="justify-center text-center items-center content-center">
             <button v-if="(this.user && this.user.auth_helper.includes('CREATE_STORE'))" class="font-bold py-2 px-4 border-b-4 hover:border-b-4 border-gray-500 hover:border-black rounded-full"
                 style="background-color: #14b8a6; color:black;" @click="crear">Crear</button>
         </div>
-        
+
     </div>
-    
+
 </template>
 <script>
 import snackBar from "@/components/snackBar.vue";
 export default {
-    components: 
+    components:
         {},
     data() {
         return {
@@ -53,7 +53,7 @@ export default {
             "user": JSON.parse(localStorage.getItem('userInFormation'))
         };
     },
-    
+
     methods: {
         crear: async function (e) {
             console.log(e);
@@ -72,7 +72,7 @@ export default {
             };
             console.log("hola")
             if (this.$route.params.id){
-                let response = await fetch("http://localhost:5000/store/create", requestOptions)
+                let response = await fetch("https://api.eltintero.co/store/create", requestOptions)
                 if (response.status === 200 || response.status === 201) {
                     await response.json();
                     //alert('libro creado existosamente');
@@ -125,6 +125,6 @@ label
     line-height: 1.5rem;
 
 }
-    
+
 
 </style>

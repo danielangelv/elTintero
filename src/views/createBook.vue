@@ -139,9 +139,9 @@
                         style="background-color: #ff2d00; color:black;" @click="crear">Eliminar</button>
                 </div>
                 <div class="justify-center text-center items-center content-center space-y-4 space-x-4">
-                    <input v-if="!user" class="font-bold py-2 px-4 border-b-4 hover:border-b-4 border-gray-500 hover:border-black rounded-full m-5 comprar" 
+                    <input v-if="!user" class="font-bold py-2 px-4 border-b-4 hover:border-b-4 border-gray-500 hover:border-black rounded-full m-5 comprar"
                     style="background-color: #14b8a6; color:black" type="button" onclick="alert('Por favor inicia sesión o registrate para comprar')" value="Comprar">
-                    <input v-if="!user" class="font-bold py-2 px-4 border-b-4 hover:border-b-4 border-gray-500 hover:border-black rounded-full m-5 comprar" 
+                    <input v-if="!user" class="font-bold py-2 px-4 border-b-4 hover:border-b-4 border-gray-500 hover:border-black rounded-full m-5 comprar"
                     style="background-color: #14b8a6; color:black" type="button" onclick="alert('Por favor inicia sesión o registrate para reservar el libro')" value="Reservar">
                 </div>
             </div>
@@ -187,7 +187,7 @@ export default {
     async created() {
         this.$route.params.id
         if (this.$route.params.id) {
-            let response = await fetch(`http://localhost:5000/book/${this.$route.params.id}`)
+            let response = await fetch(`https://api.eltintero.co/book/${this.$route.params.id}`)
             if (response.status === 200 || response.status === 201) {
                 const answer = await response.json();
                 this.id = answer.book.id
@@ -205,7 +205,7 @@ export default {
                 console.log(answer)
                 const imagenPrevisualizacion = document.querySelector("#imagenPrevisualizacion");
                 imagenPrevisualizacion.src = answer.book.img
-                
+
             }
             else {
                 //alert("No se pudo crear el libro intente nuevamente")
@@ -215,8 +215,8 @@ export default {
         }
     },
     methods: {
-        
-        
+
+
         subir_img: function (e) {
             console.log(e);
             const seleccionArchivos = document.querySelector("#seleccionArchivos");
@@ -275,7 +275,7 @@ export default {
             };
             console.log("hola")
             if (this.$route.params.id) {
-                let response = await fetch("http://localhost:5000/book/update", requestOptions)
+                let response = await fetch("https://api.eltintero.co/book/update", requestOptions)
                 if (response.status === 200 || response.status === 201) {
                     await response.json();
                     snackBar.showSnackBar("Libro actualizado existosamente");
@@ -289,7 +289,7 @@ export default {
                 }
             } else {
                 console.log("llegue al else")
-                let response = await fetch("http://localhost:5000/book/create", requestOptions)
+                let response = await fetch("https://api.eltintero.co/book/create", requestOptions)
                 if (response.status === 200 || response.status === 201) {
                     await response.json();
                     //alert('libro creado existosamente');
