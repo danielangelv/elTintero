@@ -55,7 +55,7 @@
       </div>
     </div>
 
-    <router-link to="/" class="flex items-center">
+    <router-link v-if="!user || (user && !user.auth_helper.includes('CREATE_ADMIN_USER'))" to="/" class="flex items-center">
       <img src="../assets/icono.png" class="h-10 mr-3 " alt="Flowbite Logo" />
       <span class="self-center text-sm font-semibold whitespace-nowrap text-gray-100">El Tintero</span>
     </router-link>

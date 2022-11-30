@@ -44,7 +44,7 @@
           <div class="font-normal text-gray-700 dark:text-gray-400">
             <span>{{ tienda.direccion }}</span>
           </div><br/>
-          <iframe class="gmap_iframe" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" v-bind:src="`https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=${tienda.direccion}&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed`"></iframe>
+          <iframe class="gmap_iframe" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" v-bind:src="`https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=${encodeURIComponent(tienda.direccion)}&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed`"></iframe>
         </div>
       </div>
       <div class="mr-10 col-span-2 mt-6 gap-y-10 gap-x-6 grid grid-cols-3">
@@ -98,7 +98,7 @@ export default
       {},
     data() {
       return {
-        "tiendas": [{ "nombre": "tienda 1", "lugar": "lugar 1", "direccion": "carrera2", "contacto": "1234", "horario": "lunes-marte" },
+        "tiendas": [{ "nombre": "El Tintero CO", "lugar": "", "direccion": "Pereira, Risaralda - Carrera 7 # 17 20", "contacto": "333 3333", "horario": "lunes-sábado 10am - 11pm" },
         { "nombre": "tienda 2", "lugar": "lugar 2", "direccion": "carrera2", "contacto": "1234", "horario": "lunes-marte" },
         { "nombre": "tienda 3", "lugar": "lugar 3", "direccion": "carrera2", "contacto": "1234", "horario": "lunes-marte" },
         { "nombre": "tienda 4", "lugar": "lugar 4", "direccion": "carrera2", "contacto": "1234", "horario": "lunes-marte" },],
@@ -108,14 +108,20 @@ export default
       }
     },
     async created() {
-      let response = await fetch(`${this.backend_host}/book`)
-      if (response.status === 200 || response.status === 201) {
-        const answer = await response.json();
-        this.books = answer.books
-        console.log(answer)
+      var user = JSON.parse(localStorage.getItem('userInFormation'));
+      if(!user || (user && !user.auth_helper.includes('CREATE_ADMIN_USER'))){
+        let response = await fetch(`${this.backend_host}/book`)
+        if (response.status === 200 || response.status === 201) {
+          const answer = await response.json();
+          this.books = answer.books
+          console.log(answer)
+        }
+        else {
+          alert("No se pudo crear, intente nuevamente")
+        }
       }
-      else {
-        alert("No se pudo crear, intente nuevamente")
+      else{
+        window.location = "/createAdmi"
       }
     }
 

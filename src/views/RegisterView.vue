@@ -65,14 +65,22 @@
         </div>
         <div class="md:w-1/2 px-3">
           <label v-bind:class="generic_labels_styles" for="birthPlace">
-            Lugar de nacimiento*
+            País de residencia*
           </label>
           <div class="autocomplete" style="display: grid;">
-            <input id="birtPlace" type="text" name="birtPlace" placeholder="Pereira, Risaralda">
+            <input class="AutoComplete" id="countryPlace" type="text" name="countryPlace" placeholder="Colombia">
           </div>
         </div>
       </div>
       <div class="-mx-3 md:flex mb-6">
+        <div class="md:w-1/2 px-3">
+          <label v-bind:class="generic_labels_styles" for="birthPlace">
+            Ciudad de residencia (SOLO COLOMBIA)*
+          </label>
+          <div class="autocomplete" style="display: grid;">
+            <input class="AutoComplete" id="birtPlace" type="text" name="birtPlace" placeholder="" :readonly="isReadOnlyCiudad">
+          </div>
+        </div>
         <div class="md:w-1/2 px-3 mb-6 md:mb-0">
           <label v-bind:class="generic_labels_styles" class="" for="gender">
             Género*
@@ -86,6 +94,8 @@
             </select>
           </div>
         </div>
+      </div>
+      <div class="-mx-3 md:flex mb-6">
         <div class="md:w-1/2 px-3 mb-6 md:mb-0">
           <label v-bind:class="generic_labels_styles" for="email">
             Email*
@@ -93,8 +103,10 @@
           <input v-bind:class="generic_input_styles" id="email" type="email" placeholder="Pepito0102@eltintero.com"
             v-bind:style="input_font_color" v-model="email">
         </div>
+        <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+          <FormTopics ref="topic_ref"></FormTopics>
+        </div>
       </div>
-      <FormTopics ref="topic_ref"></FormTopics>
       <div class="-mx-3 md:flex mt-9 md:w-full px-3 text-center">
         <button
           class="md:w-full font-bold py-2 px-4 border-b-4 hover:border-b-4 border-gray-500 hover:border-black rounded-full"
@@ -112,9 +124,10 @@ import FormTopics from "@/components/formTopics.vue";
 import AutoComplete from "@/components/AutoComplete.vue";
 import snackBar from "@/components/snackBar.vue";
 import DANE from "@/assets/dane.json";
+import PAISES from "@/assets/paises.json";
 
 var ciudades = DANE.map((e) => e.name+", "+e.department.name);
-
+var paises = PAISES.map((e) => e.name_en);
 export default {
   components: {
     FormTopics
@@ -122,6 +135,7 @@ export default {
   data() {
     return {
       ciudades,
+      paises,
       generic_input_styles: "w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-1",
       generic_labels_styles: "uppercase tracking-wide text-black text-xs font-bold mb-2",
       input_font_color: "color:black; appearance: none;background-color: #def2f1;border-color: rgb(20 184 166);border-width: 1px;border-radius: 10px;padding-top: 0.5rem;padding-right: 0.75rem;padding-bottom: 0.5rem;padding-left: 0.75rem;font-size: 1rem;line-height: 1.5rem;",
@@ -134,12 +148,35 @@ export default {
       mailingAddress: "",
       birthDate: "",
       birthPlace: "",
+      countryPlace: "",
       gender: "",
+      isReadOnlyCiudad: false
     };
   },
   async mounted(){
     var idAutoComplete = document.getElementById('birtPlace');
+    var idPaises = document.getElementById("countryPlace");
+    AutoComplete.autocomplete(idPaises,paises);
     AutoComplete.autocomplete(idAutoComplete, ciudades);
+    idPaises.addEventListener('keyup', () => {
+
+    if (idPaises.value != "Colombia") {
+      this.isReadOnlyCiudad = true;
+      idAutoComplete.value = "";
+      if(!idAutoComplete.classList.contains('readOnly')){
+        idAutoComplete.classList.toggle('readOnly');
+      }
+    }
+    else {
+      this.isReadOnlyCiudad = false;
+      if(idAutoComplete.classList.contains('readOnly')){
+        idAutoComplete.classList.remove('readOnly');
+      }
+    }
+
+    });
+
+    idPaises.value = "Colombia";
   },
   async created(){
     if (this.$route.params.id){
@@ -160,15 +197,30 @@ export default {
     }
   },
   methods: {
+    validarPais: function(e){
+      console.log(e);
+    },
     register: async function (e) {
       if (e) {
         e.preventDefault();
       }
       var idAutoComplete = document.getElementById('birtPlace');
+      var idAutoCompletePais = document.getElementById('countryPlace');
+      var pais = idAutoCompletePais.value;
+      var busquedaPais = paises.find((c) => c == pais);
+      if (!busquedaPais) {
+        return snackBar.showSnackBar("¡Selecciona un país válida!");
+      }
       var ciudad = idAutoComplete.value;
-      var busquedaCiudad = ciudades.find((c) => c == ciudad);
-      if (!busquedaCiudad) {
-        return snackBar.showSnackBar("¡Selecciona una ciudad válida!");
+      if (pais == "Colombia") {
+        var busquedaCiudad = ciudades.find((c) => c == ciudad);
+        if (!busquedaCiudad) {
+          return snackBar.showSnackBar("¡Selecciona una ciudad válida!");
+        }
+        ciudad = ", "+ciudad;
+      }
+      else {
+        ciudad = "";
       }
       var emailRegex = /^(?:[^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*|"[^\n"]+")@(?:[^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,63}$/i;
       var passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
@@ -201,7 +253,7 @@ export default {
         "user": this.user,
         "password": this.password,
         "messaging_addres": this.mailingAddress,
-        "birth_place": ciudad,
+        "birth_place": pais+ciudad,
         "phone_number":this.phoneNumber
       };
       const requestOptions = {
@@ -230,6 +282,14 @@ export default {
 <style>
 .domain_checkbox {
   border-right: 1px solid rgb(20 184 166);
+}
+
+.AutoComplete {
+  color: black; appearance: none; background-color: rgb(222, 242, 241); border-color: rgb(20, 184, 166); border-width: 1px; border-radius: 10px; padding: 0.5rem 0.75rem; font-size: 1rem; line-height: 1.5rem;
+}
+
+.readOnly {
+  background-color:gainsboro;
 }
 
 

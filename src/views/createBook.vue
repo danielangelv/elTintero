@@ -292,7 +292,6 @@
           /><span v-else>{{ acabado }}</span>
         </div>
       </div>
-    </div>
     <div class="text-center items-center content-center">
       <button
         v-if="$route.params.id"
@@ -311,7 +310,6 @@
         Crear
       </button>
     </div>
-  </div>
 </template>
 
 <script>
