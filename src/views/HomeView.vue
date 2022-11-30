@@ -44,7 +44,7 @@
           <div class="font-normal text-gray-700 dark:text-gray-400">
             <span>{{ tienda.direccion }}</span>
           </div><br/>
-          <iframe v-bind:src="`https://maps.google.com/maps?width=300&height=250&q=${tienda.direccion}&ie=UTF8&outpud=embed&iwloc=B`" width="300" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <iframe class="gmap_iframe" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" v-bind:src="`https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=${tienda.direccion}&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed`"></iframe>
         </div>
       </div>
       <div class="mr-10 col-span-2 mt-6 gap-y-10 gap-x-6 grid grid-cols-3">
