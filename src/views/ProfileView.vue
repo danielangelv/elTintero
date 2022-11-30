@@ -112,18 +112,15 @@ export default {
                 mode: "cors",
                 credentials: 'include'
             };
-            var data = await fetch("https://api.eltintero.co/loggout", request)
-
+            var data = await fetch(`${this.backend_host}/loggout`, request)
             if (data.status === 200) {
                 data = await data.json();
                 localStorage.removeItem('userInFormation');
-                //alert('¡Sesión cerrada con exito!');
                 snackBar.showSnackBar("¡Hasta Pronto!")
                 setTimeout(function () {
                     window.location = '/';
                 }, 1000);
             } else {
-                //alert("No se pudo cerrar la session");
                 snackBar.showSnackBar("No se pudo cerrar sesión, intenta nuevamente!")
             }
         }

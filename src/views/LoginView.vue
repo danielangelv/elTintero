@@ -77,7 +77,7 @@ export default {
         credentials: 'include'
       };
       try {
-        const data = await fetch("https://api.eltintero.co/login", requestOptions);
+        const data = await fetch(`${this.backend_host}/login`, requestOptions);
         console.log(data)
         if (data.status === 200) {
           const answer = await data.json();

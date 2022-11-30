@@ -108,7 +108,7 @@ export default
       }
     },
     async created() {
-      let response = await fetch('https://api.eltintero.co/book')
+      let response = await fetch(`${this.backend_host}/book`)
       if (response.status === 200 || response.status === 201) {
         const answer = await response.json();
         this.books = answer.books
