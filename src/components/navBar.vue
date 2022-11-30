@@ -33,6 +33,13 @@
             <div
               class="flex-grow w-full font-bold py-2 px-4 border-b-4 hover:border-b-4 border-gray-500 hover:border-black rounded-full"
               style="background-color: #14b8a6; color:black; margin-top: 5px;">
+              <router-link v-if="user" to="/ProfileView">Noticias
+              </router-link>
+            </div>
+
+            <div
+              class="flex-grow w-full font-bold py-2 px-4 border-b-4 hover:border-b-4 border-gray-500 hover:border-black rounded-full"
+              style="background-color: #14b8a6; color:black; margin-top: 5px;">
               <router-link v-if="user" to="/editAccount">Editar cuenta
               </router-link>
             </div>
