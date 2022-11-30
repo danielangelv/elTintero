@@ -113,7 +113,6 @@ import AutoComplete from "@/components/AutoComplete.vue";
 import snackBar from "@/components/snackBar.vue";
 import DANE from "@/assets/dane.json";
 
-//console.log(DANE);
 var ciudades = DANE.map((e) => e.name+", "+e.department.name);
 
 export default {
@@ -141,6 +140,24 @@ export default {
   async mounted(){
     var idAutoComplete = document.getElementById('birtPlace');
     AutoComplete.autocomplete(idAutoComplete, ciudades);
+  },
+  async created(){
+    if (this.$route.params.id){
+      let response = await fetch(`${this.backend_host}/user/${this.$route.params.id}`)
+      if (response.status === 200 || response.status === 201) {
+        const answer = await response.json();
+        this.name = answer.data.name
+        this.email = answer.data.email
+        this.phoneNumber = answer.data.phone_number
+        this.mailingAddress = answer.data.messaging_addres
+        this.birthTime = answer.data.birth_date
+        this.birthPlace = answer.birth_place
+        this.gender = answer.gender
+        console.log(answer)
+      }else {
+        snackBar.showSnackBar("Error cargando el perfil intenta de nuevo")
+      }
+    }
   },
   methods: {
     register: async function (e) {
@@ -184,7 +201,8 @@ export default {
         "user": this.user,
         "password": this.password,
         "messaging_addres": this.mailingAddress,
-        "birth_place": ciudad
+        "birth_place": ciudad,
+        "phone_number":this.phoneNumber
       };
       const requestOptions = {
         method: "POST",
@@ -194,7 +212,7 @@ export default {
         credentials: 'include'
       };
 
-      let data = await fetch("https://api.eltintero.co/register", requestOptions)
+      let data = await fetch(`${this.backend_host}/register`, requestOptions)
       if (data.status === 200 || data.status === 201){
         const answer = await data.json();
         localStorage.setItem('userInFormation', JSON.stringify(answer.data));

@@ -40,7 +40,7 @@
             <div
               class="flex-grow w-full font-bold py-2 px-4 border-b-4 hover:border-b-4 border-gray-500 hover:border-black rounded-full"
               style="background-color: #14b8a6; color:black; margin-top: 5px;">
-              <router-link v-if="user" to="/editAccount">Editar cuenta
+              <router-link v-if="user" v-bind:to="`/editAccount/${user.id}`">Editar cuenta
               </router-link>
             </div>
 
@@ -83,7 +83,7 @@ export default {
         mode: "cors",
         credentials: 'include'
       };
-      var data = await fetch("https://api.eltintero.co/loggout", request)
+      var data = await fetch(`${this.backend_host}/loggout`, request)
 
       if (data.status === 200) {
         data = await data.json();
