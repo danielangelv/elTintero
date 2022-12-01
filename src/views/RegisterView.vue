@@ -5,7 +5,8 @@
     </div>
     <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col">
       <div>
-        <h1>Registrate</h1>
+        <h1 v-if="this.$route.params.id">Editar</h1>
+        <h1 v-else>Registrate</h1>
       </div>
       <div class="-mx-3 md:flex mb-6">
         <div class="md:w-1/2 px-3 mb-6 md:mb-0">
@@ -68,7 +69,7 @@
             País de residencia*
           </label>
           <div class="autocomplete" style="display: grid;">
-            <input class="AutoComplete" id="countryPlace" type="text" name="countryPlace" placeholder="Colombia">
+            <input v-model="pais" class="AutoComplete" id="countryPlace" type="text" name="countryPlace" placeholder="Colombia">
           </div>
         </div>
       </div>
@@ -78,7 +79,7 @@
             Ciudad de residencia (SOLO COLOMBIA)*
           </label>
           <div class="autocomplete" style="display: grid;">
-            <input class="AutoComplete" id="birtPlace" type="text" name="birtPlace" placeholder="" :readonly="isReadOnlyCiudad">
+            <input v-model="ciudad" class="AutoComplete" id="birtPlace" type="text" name="birtPlace" placeholder="" :readonly="isReadOnlyCiudad">
           </div>
         </div>
         <div class="md:w-1/2 px-3 mb-6 md:mb-0">
@@ -108,10 +109,15 @@
         </div>
       </div>
       <div class="-mx-3 md:flex mt-9 md:w-full px-3 text-center">
-        <button
+        <button v-if="this.$route.params.id"
+          class="md:w-full font-bold py-2 px-4 border-b-4 hover:border-b-4 border-gray-500 hover:border-black rounded-full"
+          style="background-color: #14b8a6; color:black;" @click="update">
+          Actualizar datos
+        </button>
+        <button v-else
           class="md:w-full font-bold py-2 px-4 border-b-4 hover:border-b-4 border-gray-500 hover:border-black rounded-full"
           style="background-color: #14b8a6; color:black;" @click="register">
-          Registrate
+          Registrarse
         </button>
       </div>
     </div>
@@ -150,6 +156,8 @@ export default {
       birthPlace: "",
       countryPlace: "",
       gender: "",
+      pais:"Colombia",
+      ciudad:"",
       isReadOnlyCiudad: false
     };
   },
@@ -180,16 +188,24 @@ export default {
   },
   async created(){
     if (this.$route.params.id){
-      let response = await fetch(`${this.backend_host}/user/${this.$route.params.id}`)
+      const requestOptions = {
+        method: "GET",
+        headers: { "Content-Type": "application/json", "Access-Control-Allow-Headers": '*', "Access-Control-Expose-Headers": '*' },
+        mode: "cors",
+        credentials: 'include'
+      };
+      let response = await fetch(`${this.backend_host}/user/${this.$route.params.id}`, requestOptions)
       if (response.status === 200 || response.status === 201) {
         const answer = await response.json();
         this.name = answer.data.name
+        this.user = answer.data.user
         this.email = answer.data.email
         this.phoneNumber = answer.data.phone_number
         this.mailingAddress = answer.data.messaging_addres
         this.birthTime = answer.data.birth_date
-        this.birthPlace = answer.birth_place
-        this.gender = answer.gender
+        this.birthPlace = answer.data.birth_place
+        this.gender = answer.data.gender
+        this.id = answer.data.id
         console.log(answer)
       }else {
         snackBar.showSnackBar("Error cargando el perfil intenta de nuevo")
@@ -206,21 +222,17 @@ export default {
       }
       var idAutoComplete = document.getElementById('birtPlace');
       var idAutoCompletePais = document.getElementById('countryPlace');
-      var pais = idAutoCompletePais.value;
-      var busquedaPais = paises.find((c) => c == pais);
+      this.pais = idAutoCompletePais.value;
+      this.ciudad =idAutoComplete.value;
+      var busquedaPais = paises.find((c) => c == this.pais);
       if (!busquedaPais) {
         return snackBar.showSnackBar("¡Selecciona un país válida!");
       }
-      var ciudad = idAutoComplete.value;
-      if (pais == "Colombia") {
-        var busquedaCiudad = ciudades.find((c) => c == ciudad);
+      if (this.pais == "Colombia") {
+        var busquedaCiudad = ciudades.find((c) => c == this.ciudad);
         if (!busquedaCiudad) {
           return snackBar.showSnackBar("¡Selecciona una ciudad válida!");
         }
-        ciudad = ", "+ciudad;
-      }
-      else {
-        ciudad = "";
       }
       var emailRegex = /^(?:[^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*|"[^\n"]+")@(?:[^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,63}$/i;
       var passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
@@ -236,24 +248,24 @@ export default {
       if (!passwordRegex.test(this.password)) {
         return snackBar.showSnackBar("¡Ingresa una contraseña válida!");
       }
-      if (!this.usuario || this.usuario == "") {
+      if (!this.user || this.user == "") {
         return snackBar.showSnackBar("¡Ingresa un nombre de usuario válido!");
       }
-      if (!this.identification || this.identification == "") {
+      if (!this.id|| this.idn == "") {
         return snackBar.showSnackBar("¡Ingresa una identificación válida!");
       }
 
       this.password = window.btoa(this.password);
       const payload = {
+        "id":this.id,
         "name": this.name,
-        "last_name": "",
         "birth_date": this.birthDate,
         "gender": this.gender,
         "email": this.email,
         "user": this.user,
         "password": this.password,
         "messaging_addres": this.mailingAddress,
-        "birth_place": pais+ciudad,
+        "birth_place": this.pais+","+this.ciudad,
         "phone_number":this.phoneNumber
       };
       const requestOptions = {
@@ -269,6 +281,78 @@ export default {
         const answer = await data.json();
         localStorage.setItem('userInFormation', JSON.stringify(answer.data));
         snackBar.showSnackBar("¡Registro Exitoso!");
+        window.location = '/';
+      }
+      else{
+        alert("No se pudo crear el usuario intente de nuevo")
+      }
+    },
+    update: async function(e){
+      if (e) {
+        e.preventDefault();
+      }
+      var idAutoComplete = document.getElementById('birtPlace');
+      var idAutoCompletePais = document.getElementById('countryPlace');
+      this.pais = idAutoCompletePais.value;
+      this.ciudad = idAutoComplete.value;
+      var busquedaPais = paises.find((c) => c == this.pais);
+      if (!busquedaPais) {
+        return snackBar.showSnackBar("¡Selecciona un país válida!");
+      }
+      if (this.pais == "Colombia") {
+        var busquedaCiudad = ciudades.find((c) => c == this.ciudad);
+        if (!busquedaCiudad) {
+          return snackBar.showSnackBar("¡Selecciona una ciudad válida!");
+        }
+      }
+      var emailRegex = /^(?:[^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*|"[^\n"]+")@(?:[^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,63}$/i;
+      var passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
+      if (!emailRegex.test(this.email)) {
+        return snackBar.showSnackBar("¡Ingresa un correo válido!");
+      }
+      if (new Date(this.birthDate) < new Date("1920-01-01") || new Date(this.birthDate) > new Date("2014-01-01")) {
+        return snackBar.showSnackBar("¡Ingresa una fecha válida!");
+      }
+      if (!this.name || this.name == "") {
+        return snackBar.showSnackBar("¡Ingresa un nombre válido!");
+      }
+      if (!passwordRegex.test(this.password)) {
+        return snackBar.showSnackBar("¡Ingresa una contraseña válida!");
+      }
+      if (!this.user || this.user == "") {
+        return snackBar.showSnackBar("¡Ingresa un nombre de usuario válido!");
+      }
+      if (!this.id || this.id == "") {
+        console.log(this.id)
+        return snackBar.showSnackBar("¡Ingresa una identificación válida!");
+      }
+
+      this.password = window.btoa(this.password);
+      const payload = {
+        "id":this.id,
+        "name": this.name,
+        "birth_date": this.birthDate,
+        "gender": this.gender,
+        "email": this.email,
+        "user": this.user,
+        "password": this.password,
+        "messaging_addres": this.mailingAddress,
+        "birth_place": this.pais+this.ciudad,
+        "phone_number":this.phoneNumber
+      };
+      const requestOptions = {
+        method: "PUT",
+        headers: { "Content-Type": "application/json", "Access-Control-Allow-Headers": '*', "Access-Control-Expose-Headers": '*' },
+        mode: "cors",
+        body: JSON.stringify(payload),
+        credentials: 'include'
+      };
+
+      let data = await fetch(`${this.backend_host}/update/${this.$route.params.id}`, requestOptions)
+      if (data.status === 200 || data.status === 201){
+        const answer = await data.json();
+        localStorage.setItem('userInFormation', JSON.stringify(answer.data));
+        snackBar.showSnackBar("¡Actualizacion exitosa!");
         window.location = '/';
       }
       else{
