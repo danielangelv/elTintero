@@ -259,7 +259,6 @@ export default {
       const payload = {
         "id":this.id,
         "name": this.name,
-        "id": this.id,
         "birth_date": this.birthDate,
         "gender": this.gender,
         "email": this.email,
