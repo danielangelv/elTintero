@@ -246,12 +246,12 @@ export default {
         return snackBar.showSnackBar("¡Ingresa un nombre válido!");
       }
       if (!passwordRegex.test(this.password)) {
-        return snackBar.showSnackBar("¡Ingresa una contraseña válida!");
+        return snackBar.showSnackBar("¡Ingresa una contraseña válida!, (Debe contener al menos una letra mayúscula y una minúscula, un número y sin caracteres especiales )");
       }
       if (!this.user || this.user == "") {
         return snackBar.showSnackBar("¡Ingresa un nombre de usuario válido!");
       }
-      if (!this.id|| this.idn == "") {
+      if (!this.id || this.id == "") {
         return snackBar.showSnackBar("¡Ingresa una identificación válida!");
       }
 
@@ -259,6 +259,7 @@ export default {
       const payload = {
         "id":this.id,
         "name": this.name,
+        "id": this.id,
         "birth_date": this.birthDate,
         "gender": this.gender,
         "email": this.email,
