@@ -54,7 +54,7 @@
 
               </router-link>
             </div>
-            <p class="text-sm font-medium text-gray-900">{{ libro.precio }}</p>
+            
           </div>
         </div>
       </div>
